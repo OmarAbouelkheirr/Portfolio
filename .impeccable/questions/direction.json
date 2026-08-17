@@ -1,0 +1,163 @@
+{
+  "title": "Choose the visual world",
+  "question": "The roll assigned the Server Rack for your backend engineer portfolio. Keep it, take the Status Console (Impeccable's pick), an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The Server Rack",
+      "kicker": "THE ROLL",
+      "lineage": "the datacenter rack: servers, patch panels, status LEDs, cable runs",
+      "thesis": "Every project is a unit in a running rack — backend infrastructure made legible, the systems you've built shown the way an operator sees them.",
+      "palette": ["#1c232b", "#a9b0b8", "#e8e6e1", "#3fbf6f", "#e2a33b", "#d9504f"],
+      "materials": ["brushed aluminum", "powder coat", "status LEDs", "cable runs", "engraved labels"],
+      "viewport": "A three-rack cabinet fills the hero: each project is a rack unit with an engraved nameplate and status LEDs for live / demo / source; the featured unit sits with its panel swung open, its latch in safety yellow.",
+      "raised": [
+        { "from": "challenger-bbs", "raise": "Line-by-line pour-in reveal: headings arrive one line at a time, terminal-slow, the page's one signature motion." },
+        { "from": "challenger-mecha", "raise": "One severity condition bar: the featured project carries the only alarm-like element on the page, a bar that fills across the collection." },
+        { "from": "challenger-posada", "raise": "Mixed-size engraved headlines: section titles set like wood type — a shouting line above supporting lines, in relief." },
+        { "from": "challenger-sewing", "raise": "Nested status outlines, grain-locked: availability (shipped, in-progress, screens-only) renders as solid-vs-dashed outlines that never leave the alignment grid." },
+        { "from": "challenger-raku", "raise": "Staged case-study process: every project page moves through deliberate stages (overview → problem → solution → architecture → challenges → result), each result carrying a still map of what exists — live, demo, source, or screens only." }
+      ],
+      "risk": "A hardware theme is one step from cliché unless the panel stays honest: real statuses, real labels, and warmth in the copy — not decorative LEDs.",
+      "wireframe": { "cols": 12, "rows": 12, "regions": [
+        { "x": 0, "y": 0, "w": 12, "h": 1, "label": "nav · résumé" },
+        { "x": 2, "y": 2, "w": 8, "h": 1.5, "label": "unit 04 · source" },
+        { "x": 2, "y": 3.5, "w": 8, "h": 1.5, "accent": true, "label": "FEATURED · open panel" },
+        { "x": 2, "y": 5, "w": 8, "h": 1.5, "label": "unit 02 · live demo" },
+        { "x": 2, "y": 6.5, "w": 8, "h": 1.5, "label": "unit 03 · screens only" },
+        { "x": 2, "y": 8, "w": 8, "h": 1.5, "label": "unit 01 · github" },
+        { "x": 10.5, "y": 2, "w": 1.5, "h": 7.5, "label": "patch panel" },
+        { "x": 0, "y": 11, "w": 12, "h": 1, "label": "contact channels" }
+      ] }
+    },
+    {
+      "id": "model-pick",
+      "label": "The Status Console",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "the NOC status board: uptime, service health, error budgets",
+      "thesis": "The portfolio as an operations status board: every project is a service under monitoring, and \"all systems nominal\" is the proof of the work.",
+      "palette": ["#101318", "#171b21", "#2fd081", "#f2b33b", "#e05a4e", "#e7e9ec"],
+      "materials": ["status dots", "service tables", "uptime graphs", "console type"],
+      "viewport": "A status wall: the hero is a service table where each project row shows a green operational dot, and the featured project's row carries the only anomaly — a short incident log that resolves to resolved.",
+      "risk": "Familiar: the dark-console-with-neon status look is the default developer-portfolio move; it wins only with discipline and real content.",
+      "case": "Holds both audiences instantly — recruiters and clients both read \"systems stay up\" — but it is the most common category move.",
+      "wireframe": { "cols": 12, "rows": 12, "regions": [
+        { "x": 0, "y": 0, "w": 12, "h": 1, "label": "status header" },
+        { "x": 1, "y": 2, "w": 7, "h": 1.5, "accent": true, "label": "featured · operational" },
+        { "x": 1, "y": 3.5, "w": 7, "h": 1.5, "label": "service · green dot" },
+        { "x": 1, "y": 5, "w": 7, "h": 1.5, "label": "service · green dot" },
+        { "x": 1, "y": 6.5, "w": 7, "h": 1.5, "label": "service · amber dot" },
+        { "x": 1, "y": 8, "w": 7, "h": 1.5, "label": "service · green dot" },
+        { "x": 9, "y": 2, "w": 2, "h": 7.5, "accent": true, "label": "uptime graph" },
+        { "x": 0, "y": 11, "w": 12, "h": 1, "label": "footer" }
+      ] }
+    },
+    {
+      "id": "challenger-nixie",
+      "label": "The Nixie Counter",
+      "verdict": "competitive",
+      "lineage": "laboratory nixie-tube counters",
+      "thesis": "Numbers as glowing tubes — experience, project counts, uptime as physical digits that change by cross-fading depth.",
+      "palette": ["#2a1a0c", "#ff7a1a", "#f3e3c8", "#3a3a3a"],
+      "materials": ["glass envelopes", "metal numerals", "blackened steel", "warm glow"],
+      "viewport": "A bank of nixie tubes in the hero: each milestone a digit position, the featured metric lit orange while the rest sit dark in their envelopes.",
+      "case": "Holds precision-instrument appeal engineers feel on sight, but numbers alone cannot carry case studies; loses on product clarity to the rack's structure.",
+      "risk": "Metrics-first risk: reduces the work to counts and makes depth hard to show.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-nixie-laboratory-counter-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/signals-instruments-nixie-laboratory-counter.webp",
+      "wireframe": { "cols": 12, "rows": 12, "regions": [
+        { "x": 0, "y": 0, "w": 12, "h": 1, "label": "nav" },
+        { "x": 3, "y": 2, "w": 6, "h": 2, "accent": true, "label": "nixie metric bank" },
+        { "x": 2, "y": 5, "w": 8, "h": 3, "label": "tube array" },
+        { "x": 2, "y": 9, "w": 8, "h": 1, "label": "counters · years" },
+        { "x": 0, "y": 11, "w": 12, "h": 1, "label": "footer" }
+      ] }
+    },
+    {
+      "id": "canon",
+      "label": "The category standard",
+      "isCanon": true,
+      "thesis": "What this category ships — dark hero, code window, card grid, tech tags — executed impeccably.",
+      "palette": ["#0b0d10", "#ffffff", "#6366f1"],
+      "materials": ["code window", "card grid", "tech tags"],
+      "viewport": "The arrangement every developer-portfolio visitor expects, at full craft.",
+      "risk": "Indistinguishable from the competition by design.",
+      "wireframe": { "cols": 12, "rows": 12, "regions": [
+        { "x": 0, "y": 0, "w": 12, "h": 1, "label": "nav" },
+        { "x": 1, "y": 2, "w": 10, "h": 3, "accent": true, "label": "hero · code window" },
+        { "x": 1, "y": 6, "w": 6, "h": 3, "label": "project cards" },
+        { "x": 8, "y": 6, "w": 3, "h": 3, "label": "cards" },
+        { "x": 0, "y": 11, "w": 12, "h": 1, "label": "footer" }
+      ] }
+    },
+    {
+      "id": "challenger-bbs",
+      "label": "The ANSI Nightboard",
+      "verdict": "declined",
+      "lineage": "dial-up bulletin boards at 2 a.m.",
+      "thesis": "A dial-up BBS: the portfolio as a numbered text menu, one caller at a time.",
+      "palette": ["#000000", "#00ffff", "#ff00ff", "#ffffff"],
+      "materials": ["CP437 glyphs", "text mode", "phone line"],
+      "case": "Retro-nostalgia identifies engineers but reads hobbyist to clients; a text menu buries the case studies.",
+      "kept": "Line-by-line pour-in reveal — headings arrive one line at a time, the page's one signature motion.",
+      "hero": "https://impeccable.style/worlds/cards/medium-native-ansi-bbs-nightboard-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/medium-native-ansi-bbs-nightboard.webp"
+    },
+    {
+      "id": "challenger-mecha",
+      "label": "The Crisis Wall",
+      "verdict": "declined",
+      "lineage": "mecha-anime command centers",
+      "thesis": "A crisis wall: hazard chevrons, seven-segment countdowns, red condition bars.",
+      "palette": ["#000000", "#ff7a00", "#5dff00", "#ff3b30"],
+      "materials": ["hazard chevrons", "seven-segment digits", "phosphor glow"],
+      "case": "Reads as game UI, which the brief bans; \"crisis\" actively fights the \"reliable business systems\" claim.",
+      "kept": "One severity condition bar for the featured project — the single alarm-like element on the page.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-anime-command-center-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/pop-culture-shelf-anime-command-center.webp"
+    },
+    {
+      "id": "challenger-posada",
+      "label": "The Calavera Broadside",
+      "verdict": "declined",
+      "lineage": "penny-press newsprint broadsides",
+      "thesis": "A penny-press newsprint sheet: shouting wood-type headline, two hard columns of verse.",
+      "palette": ["#f0e6d0", "#16130f", "#a33327"],
+      "materials": ["newsprint", "wood type", "engraving"],
+      "case": "Print craft charms, but skeleton engravings and verse columns do not signal software depth.",
+      "kept": "Mixed-size wood-type headlines — section titles with one shouting line in relief.",
+      "hero": "https://impeccable.style/worlds/cards/posters-covers-sleeves-posada-calavera-broadside-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/posters-covers-sleeves-posada-calavera-broadside.webp"
+    },
+    {
+      "id": "challenger-sewing",
+      "label": "The Pattern Envelope",
+      "verdict": "declined",
+      "lineage": "home sewing pattern envelopes and tissue",
+      "thesis": "A pattern envelope and tissue: view letters A/B/C, nested dashed cut lines, grain arrows.",
+      "palette": ["#efe8d8", "#232323", "#d64a3c", "#b7c4c9"],
+      "materials": ["manila tissue", "drafting marks", "dressmaker red"],
+      "case": "Variant and nesting discipline maps well to responsive and status states, but dressmaking misidentifies the trade.",
+      "kept": "Nested status outlines, grain-locked — availability as solid-vs-dashed outlines that never leave the grid.",
+      "hero": "https://impeccable.style/worlds/cards/fashion-folded-worlds-sewing-pattern-envelope-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/fashion-folded-worlds-sewing-pattern-envelope.webp"
+    },
+    {
+      "id": "challenger-raku",
+      "label": "The Raku Vessel",
+      "verdict": "declined",
+      "lineage": "raku-fired ceramics",
+      "thesis": "A raku vessel fired through stages: fire, expose, cover, cool, reveal — a black-white skin from process.",
+      "palette": ["#111111", "#e8e4dc", "#ff7a1a", "#8a8a8a"],
+      "materials": ["carbonized clay", "crackled glaze", "smoke"],
+      "case": "Process-as-stages is a strong case-study shape, but ceramics as the world misleads a business audience.",
+      "kept": "Staged case-study process — every project moves through deliberate stages with a still map of each result.",
+      "hero": "https://impeccable.style/worlds/cards/clay-ceramics-fracture-raku-smoke-flash-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/clay-ceramics-fracture-raku-smoke-flash.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code", "toggle": false },
+  "canon": true,
+  "steer": true
+}

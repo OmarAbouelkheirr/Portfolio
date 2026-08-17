@@ -1,0 +1,19 @@
+@import './styles/main.css';
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #0b0d10;
+  color: #e9e6df;
+  font-family: 'Archivo', system-ui, sans-serif;
+  min-height: 100svh;
+}
+
+#root {
+  min-height: 100svh;
+  background-color: #0b0d10;
+}

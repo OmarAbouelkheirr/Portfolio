@@ -1,0 +1,106 @@
+{
+  "title": "Bolder hand — choose the visual world",
+  "question": "The bolder roll dealt the Daylight Section first. Keep it, take the Night-Flight Six-Pack (which beat the leader on both axes), an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The Daylight Section",
+      "kicker": "THE ROLL",
+      "lineage": "architectural daylight sections: sun paths, limewash rooms, ruled drawings",
+      "thesis": "The portfolio is a building cut in continuous section — every project a room, the sunbeam's position marking the featured work and the \"now\" of your career.",
+      "palette": ["#f2efe6", "#2a2a2e", "#d9a441", "#4a5a6e"],
+      "materials": ["limewash", "section-cut poche", "traveling sunbeam", "ruled section", "architect's lettering"],
+      "viewport": "A long continuous section fills the hero: rooms (projects) cut in charcoal poche on limewash, a gold sunbeam that has reached the featured room's door, and a tabular time stamp marking the moment.",
+      "raised": [
+        { "from": "challenger-sun", "raise": "The visitor is a small figure crossing the section — pointer presence at warm human scale inside the architecture." },
+        { "from": "challenger-benday", "raise": "The active room renders fully resolved while rooms behind it drift a shade soft — focus reads as depth, not decoration." },
+        { "from": "challenger-arcade", "raise": "Everything snaps to the ruled section grid at every size — integer stacking, nothing off-grid on any viewport." }
+      ],
+      "risk": "The building metaphor is abstract: without strong copy it reads as architecture, not engineering — every room must be filled with software's actual artifacts, screens, schemas, and diagrams.",
+      "hero": "https://impeccable.style/worlds/cards/architecture-inhabitable-space-daylight-section-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/architecture-inhabitable-space-daylight-section.webp"
+    },
+    {
+      "id": "challenger-sixpack",
+      "label": "The Night-Flight Six-Pack",
+      "verdict": "wins",
+      "kicker": "WON THE WEIGHING",
+      "lineage": "a small aircraft's night instrument six-pack",
+      "thesis": "Six luminous instruments on matte black, each owning one truth — and the cross-check sweep is exactly how a visitor validates you.",
+      "palette": ["#141414", "#0d0d0d", "#eef1f2", "#b7e38a", "#e8a33d", "#d95d4e"],
+      "materials": ["matte black panel", "luminous markings", "radium needles", "damped springs", "placard caps"],
+      "viewport": "The hero is a six-pack of round gauges: white aviation numerals and tick scales, terse placard caps beneath, needles at rest — except one, the featured project's, beginning a slow damped sweep, the page's only motion.",
+      "case": "Beats the leader on both axes: the instrument cross-check maps precisely to how a hiring manager or client validates an engineer, and \"systems that hold trust through cloud\" is the backend promise.",
+      "risk": "The aviation metaphor must stay on the reliability idea — if it becomes literal cockpits it misleads; and a dark instrument panel must not tip into the dark-console rut.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-night-flight-six-pack-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/signals-instruments-night-flight-six-pack.webp"
+    },
+    {
+      "id": "challenger-dumbar",
+      "label": "The Modular Identity",
+      "verdict": "competitive",
+      "lineage": "a modular graphic identity system of colored bars over photography",
+      "thesis": "Projects as saturated color bands snapping over real photographic panels; the category filter is a color-band, the featured project the bar that sits forward.",
+      "palette": ["#00a8e1", "#e1008c", "#ffd100", "#00913f", "#8a8f98"],
+      "materials": ["flat vector bars", "photographic panels", "mix-blend multiply", "module grid"],
+      "viewport": "A staggered stack of saturated bars over a photographic panel; the featured project's bar snaps forward with a parallax shift as the photo layer recedes.",
+      "case": "Holds product clarity — color-band navigation is unmistakable — but reads as a design studio, which blurs the backend identity.",
+      "risk": "The loud palette fights the brief's \"subtle, polished, functional\" bar; the block grammar must carry the system while the products' content carries the volume.",
+      "hero": "https://impeccable.style/worlds/cards/studio-dumbar-identity-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/studio-dumbar-identity.webp"
+    },
+    {
+      "id": "canon",
+      "label": "The category standard",
+      "isCanon": true,
+      "thesis": "What this category ships — dark hero, code window, card grid, tech tags — executed impeccably.",
+      "palette": ["#0b0d10", "#ffffff", "#6366f1"],
+      "materials": ["code window", "card grid", "tech tags"],
+      "viewport": "The arrangement every developer-portfolio visitor expects, at full craft.",
+      "risk": "Indistinguishable from the competition by design."
+    },
+    {
+      "id": "challenger-sun",
+      "label": "The Indoor Weather Sun",
+      "verdict": "declined",
+      "lineage": "an indoor weather sun in a hazed hall",
+      "thesis": "One vast amber horizon, mirrored ceiling, silhouettes lying in the haze — the visitor walks the long axis toward the half-sun.",
+      "palette": ["#c97b1e", "#1a1410", "#000000", "#f2a13c"],
+      "materials": ["sodium haze", "mirrored ceiling", "silhouette ink", "long horizon"],
+      "case": "Atmosphere over information: monofrequency amber fails legibility and contrast for a content-heavy portfolio, and the scene carries no engineering claim.",
+      "kept": "The visitor as a small figure crossing the long axis — donated to the leader as pointer presence.",
+      "hero": "https://impeccable.style/worlds/cards/light-shadow-caustics-indoor-weather-sun-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/light-shadow-caustics-indoor-weather-sun.webp"
+    },
+    {
+      "id": "challenger-benday",
+      "label": "The Benday Comic Page",
+      "verdict": "declined",
+      "lineage": "silver-age four-color comic pages on pulp",
+      "thesis": "A six-panel comic grid: projects as panels, the featured project as the splash the story earns, misregistration as the house texture.",
+      "palette": ["#e8dcc0", "#1a3f91", "#d63b2f", "#f2e1c0", "#f4c8d8"],
+      "materials": ["CMYK process inks", "ben-day dots", "pulp", "hand-lettered caps"],
+      "case": "Playful pulp misreads as hobbyist, and the misregistration gimmick fights the credibility a business audience needs.",
+      "kept": "The active panel registers clean while idle panels drift half-dot off — donated to the leader as resolved-versus-soft focus.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-benday-comic-page-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/pop-culture-shelf-benday-comic-page.webp"
+    },
+    {
+      "id": "challenger-arcade",
+      "label": "The Arcade CRT",
+      "verdict": "declined",
+      "lineage": "pixel-art arcade cabinet screens",
+      "thesis": "A 240-line pixel playfield with phosphor bloom: projects as tile rooms, palette laws encoding status, scanlines doing half the shading.",
+      "palette": ["#06080a", "#ff6b4a", "#4ad9ff", "#ffe14a", "#9b59b6"],
+      "materials": ["luminous pixels", "scanlines", "phosphor bloom", "integer scaling"],
+      "case": "The game-like aesthetic the brief bans outright, and it points at game dev rather than the backend identity.",
+      "kept": "Integer grid discipline — everything snaps to the tile grid at every size — donated to the leader as its responsive law.",
+      "hero": "https://impeccable.style/worlds/cards/medium-native-crt-arcade-pixel-glow-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/medium-native-crt-arcade-pixel-glow.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code", "toggle": false },
+  "canon": true,
+  "steer": true
+}

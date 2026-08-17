@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17T00:00:00.000Z",
+  "title": "Design System: The Night Desk",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#0b0d10", "tonalRamp": ["#0b0d10", "#101318", "#14181e", "#1a1f26", "#232830", "#2e343d", "#3c434d", "#4a515b"] },
+      "ink-raised": { "role": "neutral", "displayName": "Raised Ink", "canonical": "#101318", "tonalRamp": ["#101318", "#14181e", "#1a1f26", "#232830", "#2e343d", "#3c434d", "#4a515b", "#5a626d"] },
+      "surface": { "role": "neutral", "displayName": "Surface", "canonical": "#14181e", "tonalRamp": ["#14181e", "#1a1f26", "#232830", "#2e343d", "#3c434d", "#4a515b", "#5a626d", "#6b7480"] },
+      "surface-raise": { "role": "neutral", "displayName": "Surface Raise", "canonical": "#1a1f26", "tonalRamp": ["#1a1f26", "#232830", "#2e343d", "#3c434d", "#4a515b", "#5a626d", "#6b7480", "#7d8692"] },
+      "text": { "role": "neutral", "displayName": "Text", "canonical": "#e9e6df", "tonalRamp": ["#e9e6df", "#cfcac0", "#b5afa2", "#9b9486", "#817968", "#675f4e", "#4d4634", "#332e1a"] },
+      "text-soft": { "role": "neutral", "displayName": "Soft Text", "canonical": "#c9c4ba", "tonalRamp": ["#c9c4ba", "#b0aa9e", "#979081", "#7d7664", "#645c47", "#4a422a", "#30280d", "#161000"] },
+      "muted": { "role": "neutral", "displayName": "Muted", "canonical": "#8b929c", "tonalRamp": ["#8b929c", "#767d88", "#616974", "#4c555f", "#37414a", "#222d35", "#0d1920", "#050f16"] },
+      "accent": { "role": "primary", "displayName": "Brass Accent", "canonical": "#c9a86a", "tonalRamp": ["#c9a86a", "#b8954f", "#a68234", "#946f19", "#825c00", "#704900", "#5e3600", "#4c2300"] },
+      "accent-hot": { "role": "primary", "displayName": "Brass Hot", "canonical": "#d8b97e", "tonalRamp": ["#d8b97e", "#c7a663", "#b69348", "#a5802d", "#946d12", "#825a00", "#704700", "#5e3400"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headlines only; tight tracking, 15ch max." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings under a mono kicker." },
+      "title": { "displayName": "Title", "purpose": "Card and item titles." },
+      "body": { "displayName": "Body", "purpose": "Decks and detail prose; 56ch max." },
+      "label": { "displayName": "Label", "purpose": "Uppercase mono kickers, metadata, captions." }
+    },
+    "shadows": [
+      { "name": "card-hover", "value": "0 24px 50px -20px rgba(0,0,0,0.7)", "purpose": "Lifted cards under cursor." },
+      { "name": "hero-frame", "value": "0 40px 90px -30px rgba(0,0,0,0.8)", "purpose": "Ambient shadow staging the hero product frame." },
+      { "name": "accent-glow", "value": "0 10px 30px -12px rgba(201,168,106,0.4)", "purpose": "Hover glow under outline buttons." },
+      { "name": "accent-glow-hot", "value": "0 10px 34px -10px rgba(201,168,106,0.55)", "purpose": "Hover glow under the primary brass button." },
+      { "name": "dot-halo", "value": "0 0 12px rgba(201,168,106,0.6)", "purpose": "Brand dot and timeline node halo." }
+    ],
+    "motion": [
+      { "name": "ease-spring", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Default entrance and hover lift easing." },
+      { "name": "ease-fade", "value": "ease", "purpose": "Color and border transitions." },
+      { "name": "dur-entrance", "value": "0.6s", "purpose": "Card entrances." },
+      { "name": "dur-hero", "value": "0.7s", "purpose": "Hero content entrances." },
+      { "name": "dur-media", "value": "0.7s", "purpose": "Card media zoom on hover." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "720px" },
+      { "name": "lg", "value": "960px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Brass pill CTA; the only brass-filled element on a screen.",
+      "html": "<button class=\"ds-btn-primary\">View projects <span class=\"ds-arrow\">→</span></button>",
+      "css": ".ds-btn-primary { background: #c9a86a; color: #0b0d10; font-family: 'Archivo', system-ui, sans-serif; font-size: 0.94rem; font-weight: 600; padding: 0.8rem 1.5rem; border: 1px solid #c9a86a; border-radius: 999px; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; } .ds-btn-primary:hover { background: #d8b97e; border-color: #d8b97e; box-shadow: 0 10px 34px -10px rgba(201,168,106,0.55); transform: translateY(-2px); } .ds-btn-primary:focus-visible { outline: 2px solid #c9a86a; outline-offset: 2px; } .ds-arrow { transition: transform 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn-primary:hover .ds-arrow { transform: translateX(5px); }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Pill button with hairline-strong border; brass glow on hover.",
+      "html": "<button class=\"ds-btn-outline\">Download resume</button>",
+      "css": ".ds-btn-outline { background: transparent; color: #e9e6df; font-family: 'Archivo', system-ui, sans-serif; font-size: 0.94rem; font-weight: 600; padding: 0.8rem 1.5rem; border: 1px solid rgba(255,255,255,0.16); border-radius: 999px; cursor: pointer; transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; } .ds-btn-outline:hover { border-color: #c9a86a; box-shadow: 0 10px 30px -12px rgba(201,168,106,0.4); transform: translateY(-2px); } .ds-btn-outline:focus-visible { outline: 2px solid #c9a86a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "filter-chip",
+      "description": "Category filter; active state is brass-tinted.",
+      "html": "<div style=\"display:flex;gap:8px\"><button class=\"ds-filter\">All</button><button class=\"ds-filter is-active\">Web Apps</button><button class=\"ds-filter\">Telegram Bots</button></div>",
+      "css": ".ds-filter { background: transparent; color: #8b929c; font-family: 'Archivo', system-ui, sans-serif; font-size: 0.9rem; font-weight: 500; padding: 0.55rem 1.2rem; border: 1px solid rgba(255,255,255,0.09); border-radius: 999px; cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease; } .ds-filter:hover { color: #e9e6df; border-color: rgba(255,255,255,0.16); } .ds-filter.is-active { color: #c9a86a; border-color: rgba(201,168,106,0.5); background: rgba(201,168,106,0.08); } .ds-filter:focus-visible { outline: 2px solid #c9a86a; outline-offset: 2px; }"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Flat dark card with clipped browser-mock media; lifts with brass glow on hover.",
+      "html": "<a class=\"ds-card\" href=\"#\"><div class=\"ds-card-media\"><div class=\"ds-card-media-inner\" style=\"background:#14181e;height:120px\"></div><span class=\"ds-card-badge\">Featured</span></div><div class=\"ds-card-body\"><div class=\"ds-card-meta\"><span class=\"ds-card-cat\">Web Apps</span><span class=\"ds-card-year\">2026</span></div><h3 class=\"ds-card-title\">Inventory Intelligence</h3><p class=\"ds-card-summary\">Multi-warehouse stock engine.</p><div style=\"display:flex;gap:6px\"><span class=\"ds-tag\">NestJS</span><span class=\"ds-tag\">PostgreSQL</span></div><span class=\"ds-card-go\">Open case study <span class=\"ds-arrow\">→</span></span></div></a>",
+      "css": ".ds-card { display: flex; flex-direction: column; background: #14181e; border: 1px solid rgba(255,255,255,0.09); border-radius: 16px; overflow: hidden; text-decoration: none; color: #e9e6df; font-family: 'Archivo', system-ui, sans-serif; transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s ease; } .ds-card:hover { border-color: rgba(255,255,255,0.16); transform: translateY(-4px); box-shadow: 0 24px 50px -20px rgba(0,0,0,0.7); } .ds-card:focus-visible { outline: 2px solid #c9a86a; outline-offset: 2px; } .ds-card-media { position: relative; overflow: hidden; } .ds-card-badge { position: absolute; top: 1rem; left: 1rem; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; color: #0b0d10; background: #c9a86a; padding: 0.35rem 0.7rem; border-radius: 999px; } .ds-card-body { display: flex; flex-direction: column; padding: 1.3rem 1.4rem 1.5rem; } .ds-card-meta { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; } .ds-card-cat { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #c9a86a; } .ds-card-year { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.78rem; color: #8b929c; } .ds-card-title { font-size: 1.2rem; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 0.5rem; } .ds-card-summary { font-size: 0.94rem; line-height: 1.55; color: #8b929c; margin: 0 0 1rem; } .ds-tag { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.72rem; padding: 0.3rem 0.65rem; border: 1px solid rgba(255,255,255,0.09); border-radius: 999px; color: #8b929c; } .ds-card-go { font-weight: 600; font-size: 0.92rem; color: #c9a86a; margin-top: auto; } .ds-arrow { display: inline-block; transition: transform 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-card:hover .ds-arrow { transform: translateX(5px); }"
+    },
+    {
+      "name": "Tag Chip",
+      "kind": "chip",
+      "refersTo": "tag-chip",
+      "description": "Non-interactive mono tech tag.",
+      "html": "<span class=\"ds-tag\">NestJS</span>",
+      "css": ".ds-tag { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.72rem; padding: 0.3rem 0.65rem; border: 1px solid rgba(255,255,255,0.09); border-radius: 999px; color: #8b929c; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Night Desk",
+    "overview": "This is the surface of a backend engineer working late: a near-black desk lit only by a single warm brass lamp whose glow follows the cursor. Every surface reads as resting dark — deep ink backgrounds, slightly-lifted charcoal panels, hairline borders of faint white — and the only color that ever burns is the brass accent, used sparingly and always with intent: the lamp glow, the active filter, the brand dot, the timeline nodes, the 'open case study' arrow. It is engineering telemetry over salesmanship: mono uppercase kickers label every section like console output, and motion behaves like a well-built system — precise, damped, never decorative.\n\nThe system is minimal, dark, and calm, with a restrained premium feel. Type leads with tight-tracking Archivo; JetBrains Mono supplies the instrument-panel labels. Density is comfortable: generous section padding, a three-column project grid with a featured 2×2 anchor, centered section heads. Motion is the signature — every entrance uses a spring-like cubic-bezier(0.16, 1, 0.3, 1) ease, cards lift and their media slowly zooms, and the hero carries a cursor-tracking radial spotlight. But motion defers to the user: the entire app runs under reducedMotion=\"user\".",
+    "keyCharacteristics": [
+      "Near-black layered surfaces with hairline white borders; flat at rest, depth via soft drop shadows on hover.",
+      "A single warm brass accent used sparingly as glow, focus, and signal.",
+      "Tight-tracked Archivo display type + uppercase JetBrains Mono kickers and metadata.",
+      "Film-quality entrance motion with cubic-bezier(0.16, 1, 0.3, 1); everything honors reduced motion.",
+      "Centered editorial section heads; responsive grid that collapses 3 → 2 → 1 columns.",
+      "Pill-shaped controls and chips; generous radius on media frames; dark browser-mock artwork."
+    ],
+    "rules": [
+      { "name": "The Brass Rarity Rule", "body": "Brass covers ≤10% of any given screen; it appears as glow or signal, never as fill except the single primary button. When everything glows, nothing does.", "section": "colors" },
+      { "name": "The Hairline Rule", "body": "Surfaces are separated by 1px hairlines of faint white, never by colored borders. The dark palette is cold; only the accent may introduce hue.", "section": "colors" },
+      { "name": "The Kicker Rule", "body": "Every section and the hero open with an uppercase mono kicker in brass before the heading. If a section lacks a kicker, it is not a section.", "section": "typography" },
+      { "name": "The Mono Meta Rule", "body": "All metadata — category, year, tags, method, captions, footer meta — is JetBrains Mono. Human copy is Archivo; machine data is mono.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "No resting shadows on cards or panels. Shadows and lift belong to hover and focus states only; the hero frame is the sole exception.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep surfaces in the ink ramp and reserve brass for glow, focus, and signal (the Brass Rarity Rule).",
+      "Do open every section with an uppercase mono kicker in brass before the heading.",
+      "Do set all metadata (category, year, tags, captions, footer meta) in JetBrains Mono.",
+      "Do use cubic-bezier(0.16, 1, 0.3, 1) for entrances and hover lifts, and cap parallax/zoom motion so it stays subtle.",
+      "Do honor reduced motion — the app runs under MotionConfig reducedMotion=\"user\" and CSS guards hide parallax.",
+      "Do keep cards flat at rest; lift only on hover with the card-hover shadow.",
+      "Do use pill shapes (999px) for every interactive chip, button, and tag; 16px for cards; 18px for the hero frame."
+    ],
+    "donts": [
+      "Don't introduce a second accent hue or warm the neutrals; the palette is cold until brass appears.",
+      "Don't fill large surfaces with brass; it is a glow and a signal, not a theme color.",
+      "Don't use serif type anywhere in this world; Archivo + JetBrains Mono is the pairing.",
+      "Don't add resting shadows to cards or panels (the Flat-By-Default Rule).",
+      "Don't use sharp 0px corners on interactive or framed surfaces.",
+      "Don't add decorative or looping motion; every animation serves emphasis or state.",
+      "Don't center body copy — center only section heads, about, and footer; prose and grids align left."
+    ]
+  }
+}

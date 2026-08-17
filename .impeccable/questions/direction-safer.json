@@ -1,0 +1,79 @@
+{
+  "title": "Safer hand — choose the visual world",
+  "question": "Three grounded directions from the conventional end, shaped by your steer: premium, modern, product-focused — no neon, no terminal, no glassmorphism. Pick one, take the category standard, or steer further.",
+  "options": [
+    {
+      "id": "grounded-docs",
+      "label": "The API Reference",
+      "kicker": "PRODUCT · BACKEND",
+      "lineage": "OpenAPI documentation: endpoints, methods, request and response",
+      "thesis": "Your portfolio as the reference documentation of a system you built — every project an endpoint, every case study a response body, filters as method chips.",
+      "palette": ["#f6f8fa", "#0a2540", "#2456f0", "#e6ebf1"],
+      "materials": ["documentation", "method chips", "code blocks", "hairline rules"],
+      "viewport": "A documentation masthead: your name as the package name, role as the tagline, projects listed as endpoint entries — each with a method chip, path, and one-line description — and the featured project carrying the only \"200 OK\" badge.",
+      "risk": "Docs aesthetics are a known developer move; it wins only with real product depth and a committed visual system, never a theme.",
+      "wireframe": { "cols": 12, "rows": 12, "regions": [
+        { "x": 0, "y": 0, "w": 12, "h": 1, "label": "nav · résumé" },
+        { "x": 2, "y": 2, "w": 8, "h": 2, "accent": true, "label": "masthead · package name" },
+        { "x": 2, "y": 5, "w": 8, "h": 1.5, "label": "GET /featured · 200 OK" },
+        { "x": 2, "y": 6.5, "w": 8, "h": 1.5, "label": "POST /project-b · method chip" },
+        { "x": 2, "y": 8, "w": 8, "h": 1.5, "label": "GET /project-c · filter" },
+        { "x": 10.5, "y": 2, "w": 1.5, "h": 7, "label": "toc" },
+        { "x": 0, "y": 11, "w": 12, "h": 1, "label": "contact bar" }
+      ] }
+    },
+    {
+      "id": "grounded-editorial",
+      "label": "The Editorial Portfolio",
+      "kicker": "PREMIUM · EDITORIAL",
+      "lineage": "premium editorial and magazine design",
+      "thesis": "Projects as editorial features: a cover line, a lede, a spread — case studies with the gravity of a designed publication.",
+      "palette": ["#fbfaf7", "#1c1c1c", "#b8a88a", "#a3412c"],
+      "materials": ["editorial grid", "display serif", "magazine spreads", "pull quotes"],
+      "viewport": "A masthead hero with a cover line for the featured project; below, projects index as a spread grid of editorial headlines over generous white space.",
+      "risk": "Editorial is the default register for \"premium\"; without a strong voice it reads as a generic magazine.",
+      "wireframe": { "cols": 12, "rows": 12, "regions": [
+        { "x": 0, "y": 0, "w": 12, "h": 1, "label": "masthead · nav" },
+        { "x": 1, "y": 2, "w": 10, "h": 3, "accent": true, "label": "cover line · featured" },
+        { "x": 1, "y": 6, "w": 5, "h": 3, "label": "spread · project" },
+        { "x": 6.5, "y": 6, "w": 4.5, "h": 3, "label": "spread · project" },
+        { "x": 0, "y": 11, "w": 12, "h": 1, "label": "colophon · contact" }
+      ] }
+    },
+    {
+      "id": "grounded-datasheet",
+      "label": "The Technical Spec Sheet",
+      "kicker": "PRECISE · ENGINEERED",
+      "lineage": "engineered product datasheets and instrument catalogs",
+      "thesis": "Every project as a precision spec sheet: measured tables, hairlines, and a featured datasheet you can unfold.",
+      "palette": ["#f0f1ec", "#1b1e23", "#3a6ea5", "#c6a664"],
+      "materials": ["hairline rules", "spec tables", "dimensional callouts", "foil stamp"],
+      "viewport": "A datasheet hero: the featured project as a full spec sheet with a callout to its architecture; the rest index as a catalog of concise spec entries.",
+      "risk": "Technical precision can read cold or corporate; warmth must come from the copy and real screenshots.",
+      "wireframe": { "cols": 12, "rows": 12, "regions": [
+        { "x": 0, "y": 0, "w": 12, "h": 1, "label": "nav · résumé" },
+        { "x": 1, "y": 2, "w": 7, "h": 3, "accent": true, "label": "featured datasheet" },
+        { "x": 9, "y": 2, "w": 2, "h": 3, "label": "callouts" },
+        { "x": 1, "y": 6, "w": 3.5, "h": 3, "label": "spec entry" },
+        { "x": 4.7, "y": 6, "w": 3.5, "h": 3, "label": "spec entry" },
+        { "x": 8.4, "y": 6, "w": 3.5, "h": 3, "label": "spec entry" },
+        { "x": 0, "y": 11, "w": 12, "h": 1, "label": "footer" }
+      ] }
+    },
+    {
+      "id": "canon",
+      "label": "The category standard",
+      "isCanon": true,
+      "thesis": "The clean premium portfolio this category ships at its best — refined hero, strong project grid, tech tags — executed impeccably.",
+      "palette": ["#ffffff", "#111111", "#2563eb"],
+      "materials": ["clean grid", "product screenshots", "tech tags"],
+      "viewport": "A calm hero with name and role, a filterable project grid, a career timeline, and a contact bar — the arrangement a visitor expects, at full craft.",
+      "case": "Played against the dark-neon typewriter hero, the stock card-grid template, and the glassy awwwards look — the straight version of this category, at full fidelity.",
+      "risk": "Indistinguishable from the competition by design."
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code", "toggle": false },
+  "canon": true,
+  "steer": true
+}
