@@ -55,7 +55,7 @@ export const profile = {
   phone: '+201005454695',
   github: 'https://github.com/OmarAbouelkheirr/',
   linkedin: 'https://www.linkedin.com/in/omar-abouelkhier-eg/',
-  youtube: 'https://www.youtube.com/',
+  youtube: 'https://www.youtube.com/channel/UCG8NTaeAu2U27NZPt9wNktw',
 }
 
 export const expertise = [
