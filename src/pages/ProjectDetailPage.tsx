@@ -3,13 +3,13 @@ import { motion, MotionConfig } from 'framer-motion'
 import {
   findProject,
   categoryTone,
-  categoryMethod,
   profile,
 } from '../data/portfolioData.ts'
 import { useSpotlight } from '../hooks/useSpotlight.ts'
 import { Reveal } from '../components/Reveal.tsx'
 import { AppMock } from '../components/AppMock.tsx'
 import { FlowDiagram } from '../components/FlowDiagram.tsx'
+import { SmoothLink } from '../components/SmoothLink.tsx'
 
 export function ProjectDetailPage() {
   const { projectId } = useParams()
@@ -48,10 +48,10 @@ export function ProjectDetailPage() {
             {profile.name}
           </Link>
           <nav className="dark-links" aria-label="Sections">
-            <a href="#overview">Overview</a>
-            <a href="#problem">Problem</a>
-            <a href="#solution">Solution</a>
-            <a href="#architecture">Architecture</a>
+            <SmoothLink href="#overview">Overview</SmoothLink>
+            <SmoothLink href="#problem">Problem</SmoothLink>
+            <SmoothLink href="#solution">Solution</SmoothLink>
+            <SmoothLink href="#architecture">Architecture</SmoothLink>
           </nav>
           <Link className="dark-resume" to="/">Projects</Link>
         </header>
@@ -66,71 +66,77 @@ export function ProjectDetailPage() {
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
               <p className="dark-hero-kicker">
-                <span style={{ color: tone }}>{project.category}</span> · {project.year}
+                {project.category} · {project.year}
               </p>
               <h1>{project.title}</h1>
               <p className="dark-hero-deck">{project.summary}</p>
-              {hasLinks && (
-                <div className="dark-hero-cta">
-                  {project.demoUrl && (
-                    <a className="dark-btn dark-btn-primary" href={project.demoUrl} target="_blank" rel="noreferrer">
-                      Live demo <span className="dark-arrow">→</span>
-                    </a>
-                  )}
-                  {project.githubUrl && (
-                    <a className="dark-btn" href={project.githubUrl} target="_blank" rel="noreferrer">
-                      GitHub repository
-                    </a>
-                  )}
-                </div>
-              )}
+              <ul className="dark-tags">
+                {project.tags.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+              <div className="dark-hero-cta">
+                {project.demoUrl ? (
+                  <a className="dark-btn dark-btn-primary" href={project.demoUrl} target="_blank" rel="noreferrer">
+                    Open live demo →
+                  </a>
+                ) : null}
+                {project.githubUrl ? (
+                  <a className="dark-btn" href={project.githubUrl} target="_blank" rel="noreferrer">
+                    View source →
+                  </a>
+                ) : null}
+                {!hasLinks ? <p className="dark-availability">No public demo or repository — screenshots only.</p> : null}
+              </div>
             </motion.div>
           </section>
 
-          <section className="dark-detail-media">
+          <div className="dark-detail-media">
             <Reveal>
               <div className="dark-hero-frame">
                 <AppMock tone={tone} seed={project.id} tall />
               </div>
             </Reveal>
-          </section>
+          </div>
 
           <div className="dark-detail-body">
-            <section className="dark-detail-section" id="overview">
+            <section id="overview" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">01 · System Overview</p>
-                <h2>System Overview</h2>
+                <p className="dark-kicker">01 · Overview</p>
+                <h2>Overview</h2>
                 <p className="dark-detail-text">{d.overview}</p>
               </Reveal>
             </section>
 
-            <section className="dark-detail-section" id="problem">
+            <section id="problem" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">02 · The Problem</p>
-                <h2>The Problem</h2>
+                <p className="dark-kicker">02 · Context</p>
+                <h2>Problem</h2>
                 <p className="dark-detail-text">{d.problem}</p>
               </Reveal>
             </section>
 
-            <section className="dark-detail-section" id="solution">
+            <section id="solution" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">03 · The Solution</p>
-                <h2>The Solution &amp; Role</h2>
+                <p className="dark-kicker">03 · Approach</p>
+                <h2>Solution</h2>
                 <p className="dark-detail-text">{d.solution}</p>
-                <p className="dark-detail-text" style={{ marginTop: '1.2rem', color: tone, fontWeight: 600 }}>
-                  Role: {d.role}
-                </p>
               </Reveal>
             </section>
 
-            <section className="dark-detail-section" id="stack">
+            <section id="role" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">04 · Technology Stack</p>
-                <h2>Stack &amp; Methods</h2>
+                <p className="dark-kicker">04 · Role</p>
+                <h2>Role</h2>
+                <p className="dark-detail-text">{d.role}</p>
+              </Reveal>
+            </section>
+
+            <section id="stack" className="dark-detail-section">
+              <Reveal>
+                <p className="dark-kicker">05 · Stack</p>
+                <h2>Technology</h2>
                 <ul className="dark-tags dark-tags-lg">
-                  <li style={{ background: tone, color: '#0b0d10', fontWeight: 700 }}>
-                    {categoryMethod(project.category)}
-                  </li>
                   {d.stack.map((s) => (
                     <li key={s}>{s}</li>
                   ))}
@@ -138,66 +144,51 @@ export function ProjectDetailPage() {
               </Reveal>
             </section>
 
-            <section className="dark-detail-section" id="architecture">
+            <section id="architecture" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">05 · Architecture</p>
-                <h2>Architecture &amp; Flow</h2>
+                <p className="dark-kicker">06 · Architecture</p>
+                <h2>Architecture</h2>
                 <FlowDiagram steps={d.architecture} tone={tone} />
               </Reveal>
             </section>
 
-            {d.challenges.length > 0 && (
-              <section className="dark-detail-section" id="challenges">
-                <Reveal>
-                  <p className="dark-kicker">06 · Key Challenges</p>
-                  <h2>Engineering Challenges</h2>
-                  <ul className="dark-detail-list">
-                    {d.challenges.map((c) => (
-                      <li key={c}>{c}</li>
-                    ))}
-                  </ul>
-                </Reveal>
-              </section>
-            )}
+            <section id="challenges" className="dark-detail-section">
+              <Reveal>
+                <p className="dark-kicker">07 · Challenges</p>
+                <h2>Challenges</h2>
+                <ul className="dark-detail-list">
+                  {d.challenges.map((c) => (
+                    <li key={c}>{c}</li>
+                  ))}
+                </ul>
+              </Reveal>
+            </section>
 
-            {d.screenshots.length > 0 && (
-              <section className="dark-detail-section" id="screens">
-                <Reveal>
-                  <p className="dark-kicker">07 · Product Views</p>
-                  <h2>System Surfaces</h2>
-                  <div className="dark-shots">
-                    {d.screenshots.map((s, i) => (
-                      <div key={s.label} className="dark-shot">
-                        <div className="dark-shot-frame">
-                          <AppMock tone={tone} seed={`${project.id}-${i}`} />
-                        </div>
-                        <p className="dark-shot-caption">
-                          <strong>{s.label}:</strong> {s.caption}
-                        </p>
+            <section id="screenshots" className="dark-detail-section">
+              <Reveal>
+                <p className="dark-kicker">08 · Artifacts</p>
+                <h2>Screenshots</h2>
+                <div className="dark-shots">
+                  {d.screenshots.map((s) => (
+                    <figure className="dark-shot" key={s.label}>
+                      <div className="dark-hero-frame dark-shot-frame">
+                        <AppMock tone={tone} seed={project.id + s.label} />
                       </div>
-                    ))}
-                  </div>
-                </Reveal>
-              </section>
-            )}
+                      <figcaption>
+                        <strong>{s.label}</strong>
+                        <span>{s.caption}</span>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </Reveal>
+            </section>
+
+            <div className="dark-detail-end">
+              <Link className="dark-btn" to="/">← Back to all projects</Link>
+            </div>
           </div>
         </main>
-
-        <footer className="dark-footer" id="contact">
-          <div className="dark-footer-inner">
-            <Reveal>
-              <p className="dark-kicker">Next System</p>
-              <h2>Have a project in mind?</h2>
-              <p className="dark-footer-deck">
-                Let's discuss backend architecture, SaaS development, or business system integration.
-              </p>
-              <div className="dark-hero-cta">
-                <Link className="dark-btn dark-btn-primary" to="/">Back to all projects</Link>
-                <a className="dark-btn" href={`mailto:${profile.email}`}>{profile.email}</a>
-              </div>
-            </Reveal>
-          </div>
-        </footer>
       </div>
     </MotionConfig>
   )

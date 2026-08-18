@@ -9,16 +9,13 @@ import {
   CATEGORY_FILTERS,
   FEATURED_ID,
   categoryTone,
-  categoryMethod,
 } from '../data/portfolioData.ts'
 import type { Project, Category } from '../data/portfolioData.ts'
 import { useSpotlight } from '../hooks/useSpotlight.ts'
 import { Reveal } from '../components/Reveal.tsx'
-import { Parallax } from '../components/Parallax.tsx'
 import { AppMock } from '../components/AppMock.tsx'
 import { CareerTimeline } from '../components/CareerTimeline.tsx'
-
-const accent = '#c9a86a'
+import { SmoothLink } from '../components/SmoothLink.tsx'
 
 function ProjectCard({
   project,
@@ -36,7 +33,6 @@ function ProjectCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={featured ? 'dark-col-featured' : ''}
     >
       <Link
         to={`/projects/${project.id}`}
@@ -45,9 +41,8 @@ function ProjectCard({
       >
         <div className="dark-card-media">
           <div className="dark-card-media-inner">
-            <AppMock tone={tone} seed={project.id} tall={featured} />
+            <AppMock tone={tone} seed={project.id} />
           </div>
-          <span className="dark-card-method">{categoryMethod(project.category)}</span>
           {featured && <span className="dark-card-feat">Featured</span>}
         </div>
         <div className="dark-card-body">
@@ -90,12 +85,12 @@ export function HomePage() {
             {profile.name}
           </Link>
           <nav className="dark-links" aria-label="Sections">
-            <a href="#projects">Projects</a>
-            <a href="#expertise">Expertise</a>
-            <a href="#journey">Journey</a>
-            <a href="#about">About</a>
+            <SmoothLink href="#projects">Projects</SmoothLink>
+            <SmoothLink href="#expertise">Expertise</SmoothLink>
+            <SmoothLink href="#journey">Journey</SmoothLink>
+            <SmoothLink href="#about">About</SmoothLink>
           </nav>
-          <a className="dark-resume" href="#contact">Resume</a>
+          <a className="dark-resume" href="/resume.pdf" download>Resume</a>
         </header>
 
         <section className="dark-hero" ref={spotlight}>
@@ -108,29 +103,22 @@ export function HomePage() {
           >
             <p className="dark-hero-kicker">{profile.location} · {profile.role}</p>
             <h1>
-              Backend engineering for
+              Building software for
               <em> SaaS &amp; business systems.</em>
             </h1>
             <p className="dark-hero-deck">{about.body}</p>
             <div className="dark-hero-cta">
-              <a className="dark-btn dark-btn-primary" href="#projects">View projects</a>
-              <a className="dark-btn" href="#contact">Download resume</a>
-              <a className="dark-btn dark-btn-ghost" href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
+              <SmoothLink className="dark-btn dark-btn-primary" href="#projects">View projects</SmoothLink>
+              <a className="dark-btn" href="/resume.pdf" download>Download resume</a>
+              <a className="dark-btn dark-btn-ghost dark-hero-social" href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg className="dark-btn-icon" aria-hidden="true"><use href="/icons.svg#github-icon" /></svg>
+                GitHub
+              </a>
+              <a className="dark-btn dark-btn-ghost dark-hero-social" href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg className="dark-btn-icon" aria-hidden="true"><use href="/icons.svg#linkedin-icon" /></svg>
+                LinkedIn
+              </a>
             </div>
-          </motion.div>
-
-          <motion.div
-            className="dark-hero-media"
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <Parallax speed={12}>
-              <div className="dark-hero-frame">
-                <AppMock tone={accent} seed="featured" tall />
-              </div>
-            </Parallax>
-            <span className="dark-hero-caption">A live product surface — the work is shipping.</span>
           </motion.div>
         </section>
 

@@ -418,23 +418,6 @@ export function findProject(id: string | undefined): Project | undefined {
   return projects.find((p) => p.id === id)
 }
 
-export function categoryMethod(category: Category): string {
-  switch (category) {
-    case 'Web & SaaS':
-      return 'GET'
-    case 'Desktop Systems':
-      return 'SYS'
-    case 'Telegram Mini Apps':
-      return 'POST'
-    case 'Telegram Bots':
-      return 'PUT'
-    case 'Unity Games':
-      return 'PLAY'
-    default:
-      return 'GET'
-  }
-}
-
 export function categoryTone(category: Category): string {
   switch (category) {
     case 'Web & SaaS':
