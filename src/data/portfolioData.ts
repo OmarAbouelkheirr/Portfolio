@@ -52,9 +52,9 @@ export const profile = {
   tagline: 'Backend-focused · SaaS · Business Systems',
   location: 'Remote · Worldwide',
   email: 'omar@example.com',
-  phone: '+1 555 010 0246',
-  github: 'https://github.com/',
-  linkedin: 'https://www.linkedin.com/',
+  phone: '+201005454695',
+  github: 'https://github.com/OmarAbouelkheirr/',
+  linkedin: 'https://www.linkedin.com/in/omar-abouelkhier-eg/',
   youtube: 'https://www.youtube.com/',
 }
 
