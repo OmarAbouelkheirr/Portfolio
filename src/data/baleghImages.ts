@@ -1,6 +1,6 @@
 import type { ProjectScreenshot } from './projectImages.ts'
 
-export const baleghCoverImage = '/projects/balegh/desktop/cover.png'
+export const baleghCoverImage = '/projects/balegh/desktop/01-home.png'
 
 export const baleghScreenshots: ProjectScreenshot[] = [
   {
