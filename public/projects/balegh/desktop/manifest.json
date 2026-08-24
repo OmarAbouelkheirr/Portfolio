@@ -1,0 +1,104 @@
+{
+  "source": "https://balegh-academy.com",
+  "capturedAt": "2026-08-24T12:44:23.649Z",
+  "results": [
+    {
+      "route": "/",
+      "file": "01-home.png",
+      "label": "Home Page",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/courses",
+      "file": "02-courses.png",
+      "label": "Courses Catalog",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/login",
+      "file": "03-login.png",
+      "label": "Student Login",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/register",
+      "file": "04-register.png",
+      "label": "Account Registration",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/forgot-password",
+      "file": "05-forgot-password.png",
+      "label": "Password Recovery",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/admin/login",
+      "file": "06-admin-login.png",
+      "label": "Admin Login",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/faq",
+      "file": "07-faq.png",
+      "label": "FAQ",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/support",
+      "file": "08-support.png",
+      "label": "Support",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/contact",
+      "file": "09-contact.png",
+      "label": "Contact",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/privacy",
+      "file": "10-privacy.png",
+      "label": "Privacy Policy",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/terms",
+      "file": "11-terms.png",
+      "label": "Terms of Use",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/registration-unavailable",
+      "file": "12-registration-unavailable.png",
+      "label": "Registration Unavailable",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/courses/f636a702-ae1a-4c1f-b18e-5c8c1a7a3be9",
+      "file": "13-course-foundation-verbal.png",
+      "label": "Verbal Foundation Course",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/courses/c31fc3f7-719f-47e7-a010-f58bc63bdf0c",
+      "file": "14-course-training-verbal.png",
+      "label": "Verbal Training Course",
+      "status": 200,
+      "ok": true
+    }
+  ]
+}

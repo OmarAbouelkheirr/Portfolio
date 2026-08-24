@@ -1,31 +1,50 @@
-import { useState, useMemo } from 'react'
+import { useMemo, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion'
 import {
-  projects,
-  profile,
-  expertise,
-  about,
   CATEGORY_FILTERS,
-  FEATURED_ID,
   categoryTone,
+  type Category,
 } from '../data/portfolioData.ts'
-import type { Project, Category } from '../data/portfolioData.ts'
+import { projects, FEATURED_ID, type PortfolioProject } from '../data/projectCatalog.ts'
+import { getProjectCoverImage } from '../data/projectImages.ts'
+import { baleghCoverImage } from '../data/baleghImages.ts'
+import { howToTrainAICoverImage } from '../data/howToTrainAIImages.ts'
 import { useSpotlight } from '../hooks/useSpotlight.ts'
 import { Reveal } from '../components/Reveal.tsx'
 import { AppMock } from '../components/AppMock.tsx'
 import { CareerTimeline } from '../components/CareerTimeline.tsx'
 import { SmoothLink } from '../components/SmoothLink.tsx'
+import { LanguageToggle } from '../components/LanguageToggle.tsx'
+import { useLanguage } from '../i18n/LanguageContext.tsx'
+import {
+  getCategoryLabel,
+  getFilterLabel,
+  getLocalizedAbout,
+  getLocalizedCareer,
+  getLocalizedExpertise,
+  getLocalizedProfile,
+  localizeProject,
+  uiCopy,
+} from '../i18n/content.ts'
 
 function ProjectCard({
   project,
   tone,
   featured = false,
 }: {
-  project: Project
+  project: PortfolioProject
   tone: string
   featured?: boolean
 }) {
+  const { language } = useLanguage()
+  const copy = uiCopy[language]
+  const coverImage = project.id === 'balegh'
+    ? baleghCoverImage
+    : project.id === 'how-to-train-your-ai'
+      ? howToTrainAICoverImage
+      : getProjectCoverImage(project.id)
+
   return (
     <motion.div
       layout
@@ -37,29 +56,36 @@ function ProjectCard({
       <Link
         to={`/projects/${project.id}`}
         className={`dark-card${featured ? ' dark-card-featured' : ''}`}
-        style={{ '--card-tone': tone } as React.CSSProperties}
+        style={{ '--card-tone': tone } as CSSProperties}
       >
         <div className="dark-card-media">
           <div className="dark-card-media-inner">
-            <AppMock tone={tone} seed={project.id} />
+            {coverImage ? (
+              <img
+                src={coverImage}
+                alt={`${project.title} — ${copy.screenshotsTitle}`}
+                loading="lazy"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+              />
+            ) : (
+              <AppMock tone={tone} seed={project.id} />
+            )}
           </div>
-          {featured && <span className="dark-card-feat">Featured</span>}
+          {featured && <span className="dark-card-feat">{copy.featured}</span>}
         </div>
         <div className="dark-card-body">
           <div className="dark-card-meta">
-            <span className="dark-card-cat" style={{ color: tone }}>{project.category}</span>
+            <span className="dark-card-cat" style={{ color: tone }}>{getCategoryLabel(project.category, language)}</span>
             <span className="dark-card-year">{project.year}</span>
           </div>
           <h3>{project.title}</h3>
           <p>{project.summary}</p>
           <ul className="dark-tags">
-            {project.tags.map((t) => (
-              <li key={t}>{t}</li>
+            {project.tags.map((tag) => (
+              <li key={tag} dir="auto">{tag}</li>
             ))}
           </ul>
-          <span className="dark-card-go">
-            Open case study <span className="dark-arrow">→</span>
-          </span>
+          <span className="dark-card-go">{copy.openCaseStudy}</span>
         </div>
       </Link>
     </motion.div>
@@ -69,28 +95,41 @@ function ProjectCard({
 export function HomePage() {
   const [filter, setFilter] = useState<'All' | Category>('All')
   const spotlight = useSpotlight()
+  const { language, direction } = useLanguage()
+  const copy = uiCopy[language]
+  const localizedProfile = getLocalizedProfile(language)
+  const localizedAbout = getLocalizedAbout(language)
+  const localizedExpertise = getLocalizedExpertise(language)
+  const localizedCareer = getLocalizedCareer(language)
+  const localizedProjects = useMemo(
+    () => projects.map((project) => localizeProject(project, language)),
+    [language],
+  )
 
-  const featured = projects.find((p) => p.id === FEATURED_ID)
+  const featured = localizedProjects.find((project) => project.id === FEATURED_ID)
   const filtered = useMemo(
-    () => (filter === 'All' ? projects : projects.filter((p) => p.category === filter)),
-    [filter],
+    () => (filter === 'All' ? localizedProjects : localizedProjects.filter((project) => project.category === filter)),
+    [filter, localizedProjects],
   )
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="dark">
+      <div className="dark" dir={direction}>
         <header className="dark-nav">
           <Link to="/" className="dark-brand">
             <span className="dark-brand-dot"></span>
-            {profile.name}
+            {localizedProfile.name}
           </Link>
-          <nav className="dark-links" aria-label="Sections">
-            <SmoothLink href="#projects">Projects</SmoothLink>
-            <SmoothLink href="#expertise">Expertise</SmoothLink>
-            <SmoothLink href="#journey">Journey</SmoothLink>
-            <SmoothLink href="#about">About</SmoothLink>
+          <nav className="dark-links" aria-label={copy.navProjects}>
+            <SmoothLink href="#projects">{copy.navProjects}</SmoothLink>
+            <SmoothLink href="#expertise">{copy.navExpertise}</SmoothLink>
+            <SmoothLink href="#journey">{copy.navJourney}</SmoothLink>
+            <SmoothLink href="#about">{copy.navAbout}</SmoothLink>
           </nav>
-          <a className="dark-resume" href="/resume.pdf" download>Resume</a>
+          <div className="dark-nav-actions">
+            <LanguageToggle />
+            <a className="dark-resume" href="/resume.pdf" download>{copy.resume}</a>
+          </div>
         </header>
 
         <section className="dark-hero" ref={spotlight}>
@@ -101,20 +140,20 @@ export function HomePage() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="dark-hero-inner"
           >
-            <p className="dark-hero-kicker">{profile.location} · {profile.role}</p>
+            <p className="dark-hero-kicker">{localizedProfile.location} · {localizedProfile.role}</p>
             <h1>
-              Building software for
-              <em> SaaS &amp; business systems.</em>
+              {copy.heroHeading}
+              <em>{copy.heroAccent}</em>
             </h1>
-            <p className="dark-hero-deck">{about.body}</p>
+            <p className="dark-hero-deck">{localizedAbout.body}</p>
             <div className="dark-hero-cta">
-              <SmoothLink className="dark-btn dark-btn-primary" href="#projects">View projects</SmoothLink>
-              <a className="dark-btn" href="/resume.pdf" download>Download resume</a>
-              <a className="dark-btn dark-btn-ghost dark-hero-social" href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <SmoothLink className="dark-btn dark-btn-primary" href="#projects">{copy.viewProjects}</SmoothLink>
+              <a className="dark-btn" href="/resume.pdf" download>{copy.downloadResume}</a>
+              <a className="dark-btn dark-btn-ghost dark-hero-social" href={localizedProfile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <svg className="dark-btn-icon" aria-hidden="true"><use href="/icons.svg#github-icon" /></svg>
                 GitHub
               </a>
-              <a className="dark-btn dark-btn-ghost dark-hero-social" href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a className="dark-btn dark-btn-ghost dark-hero-social" href={localizedProfile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <svg className="dark-btn-icon" aria-hidden="true"><use href="/icons.svg#linkedin-icon" /></svg>
                 LinkedIn
               </a>
@@ -125,20 +164,20 @@ export function HomePage() {
         <section className="dark-section" id="projects">
           <div className="dark-section-head">
             <Reveal>
-              <p className="dark-kicker">The work</p>
-              <h2>Projects</h2>
-              <p className="dark-section-deck">One featured system, then the collection, filterable by category.</p>
+              <p className="dark-kicker">{copy.theWork}</p>
+              <h2>{copy.projectsTitle}</h2>
+              <p className="dark-section-deck">{copy.projectsDeck}</p>
             </Reveal>
           </div>
 
           <div className="dark-filters">
-            {CATEGORY_FILTERS.map((f) => (
+            {CATEGORY_FILTERS.map((category) => (
               <button
-                key={f}
-                className={`dark-filter${filter === f ? ' is-active' : ''}`}
-                onClick={() => setFilter(f)}
+                key={category}
+                className={`dark-filter${filter === category ? ' is-active' : ''}`}
+                onClick={() => setFilter(category)}
               >
-                {f}
+                {getFilterLabel(category, language)}
               </button>
             ))}
           </div>
@@ -150,9 +189,9 @@ export function HomePage() {
 
             <AnimatePresence mode="popLayout">
               {filtered
-                .filter((p) => p.id !== FEATURED_ID)
-                .map((p) => (
-                  <ProjectCard key={p.id} project={p} tone={categoryTone(p.category)} />
+                .filter((project) => project.id !== FEATURED_ID)
+                .map((project) => (
+                  <ProjectCard key={project.id} project={project} tone={categoryTone(project.category)} />
                 ))}
             </AnimatePresence>
           </div>
@@ -161,17 +200,17 @@ export function HomePage() {
         <section className="dark-section dark-section-raise" id="expertise">
           <div className="dark-section-head">
             <Reveal>
-              <p className="dark-kicker">Capabilities</p>
-              <h2>Engineering expertise</h2>
+              <p className="dark-kicker">{copy.capabilities}</p>
+              <h2>{copy.expertiseTitle}</h2>
             </Reveal>
           </div>
           <div className="dark-expertise">
-            {expertise.map((e, i) => (
-              <Reveal key={e.title} delay={Math.min(i * 0.05, 0.35)}>
+            {localizedExpertise.map((item, index) => (
+              <Reveal key={item.title} delay={Math.min(index * 0.05, 0.35)}>
                 <div className="dark-expertise-item">
-                  <span className="dark-expertise-num">{String(i + 1).padStart(2, '0')}</span>
-                  <h3>{e.title}</h3>
-                  <p>{e.detail}</p>
+                  <span className="dark-expertise-num">{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.detail}</p>
                 </div>
               </Reveal>
             ))}
@@ -181,18 +220,18 @@ export function HomePage() {
         <section className="dark-section" id="journey">
           <div className="dark-section-head">
             <Reveal>
-              <p className="dark-kicker">The record</p>
-              <h2>Career journey</h2>
+              <p className="dark-kicker">{copy.theRecord}</p>
+              <h2>{copy.journeyTitle}</h2>
             </Reveal>
           </div>
-          <CareerTimeline />
+          <CareerTimeline items={localizedCareer} />
         </section>
 
         <section className="dark-section" id="about">
           <Reveal>
             <div className="dark-about">
-              <p className="dark-kicker">{about.heading}</p>
-              <p className="dark-about-text">{about.body}</p>
+              <p className="dark-kicker">{localizedAbout.heading}</p>
+              <p className="dark-about-text">{localizedAbout.body}</p>
             </div>
           </Reveal>
         </section>
@@ -200,17 +239,15 @@ export function HomePage() {
         <footer className="dark-footer" id="contact">
           <div className="dark-footer-inner">
             <Reveal>
-              <p className="dark-kicker">Contact</p>
-              <h2>Build dependable systems.</h2>
-              <p className="dark-footer-deck">
-                Open to software engineering roles and SaaS / business-system engagements.
-              </p>
+              <p className="dark-kicker">{copy.contact}</p>
+              <h2>{copy.footerTitle}</h2>
+              <p className="dark-footer-deck">{copy.footerDeck}</p>
               <div className="dark-hero-cta">
-                <a className="dark-btn dark-btn-primary" href={`mailto:${profile.email}`}>{profile.email}</a>
-                <a className="dark-btn" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-                <a className="dark-btn" href={profile.youtube} target="_blank" rel="noreferrer">YouTube</a>
+                <a className="dark-btn dark-btn-primary" href={`mailto:${localizedProfile.email}`}>{localizedProfile.email}</a>
+                <a className="dark-btn" href={localizedProfile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+                <a className="dark-btn" href={localizedProfile.youtube} target="_blank" rel="noreferrer">YouTube</a>
               </div>
-              <p className="dark-footer-meta">{profile.location} · {profile.phone}</p>
+              <p className="dark-footer-meta">{localizedProfile.location} · {localizedProfile.phone}</p>
             </Reveal>
           </div>
         </footer>

@@ -1,34 +1,64 @@
 import { Link, useParams } from 'react-router-dom'
 import { motion, MotionConfig } from 'framer-motion'
-import {
-  findProject,
-  categoryTone,
-  profile,
-} from '../data/portfolioData.ts'
+import { categoryTone } from '../data/portfolioData.ts'
+import { findProject } from '../data/projectCatalog.ts'
+import { getProjectScreenshots } from '../data/projectImages.ts'
+import { baleghScreenshots } from '../data/baleghImages.ts'
+import { howToTrainAIScreenshots } from '../data/howToTrainAIImages.ts'
 import { useSpotlight } from '../hooks/useSpotlight.ts'
 import { Reveal } from '../components/Reveal.tsx'
-import { AppMock } from '../components/AppMock.tsx'
 import { FlowDiagram } from '../components/FlowDiagram.tsx'
 import { SmoothLink } from '../components/SmoothLink.tsx'
+import { ProjectGallery } from '../components/ProjectGallery.tsx'
+import { LanguageToggle } from '../components/LanguageToggle.tsx'
+import { useLanguage } from '../i18n/LanguageContext.tsx'
+import {
+  getCategoryLabel,
+  getLocalizedProfile,
+  localizeProject,
+  localizeScreenshots,
+  uiCopy,
+} from '../i18n/content.ts'
+import '../styles/projectGallery.css'
 
 export function ProjectDetailPage() {
   const { projectId } = useParams()
-  const project = findProject(projectId)
+  const baseProject = findProject(projectId)
   const spotlight = useSpotlight()
+  const { language, direction } = useLanguage()
+  const copy = uiCopy[language]
+  const localizedProfile = getLocalizedProfile(language)
+  const project = baseProject ? localizeProject(baseProject, language) : undefined
+
+  const baseScreenshots = baseProject
+    ? baseProject.id === 'balegh'
+      ? baleghScreenshots
+      : baseProject.id === 'how-to-train-your-ai'
+        ? howToTrainAIScreenshots
+        : getProjectScreenshots(baseProject.id)
+    : []
+
+  const screenshots = baseProject
+    ? localizeScreenshots(baseProject.id, baseScreenshots, language)
+    : []
 
   if (!project) {
     return (
       <MotionConfig reducedMotion="user">
-        <div className="dark">
+        <div className="dark" dir={direction}>
           <header className="dark-nav">
             <Link to="/" className="dark-brand">
               <span className="dark-brand-dot"></span>
-              {profile.name}
+              {localizedProfile.name}
             </Link>
+            <div className="dark-nav-actions">
+              <LanguageToggle />
+              <Link className="dark-resume" to="/">{copy.navProjects}</Link>
+            </div>
           </header>
           <div className="dark-missing">
-            <h1>Project not found</h1>
-            <Link className="dark-btn" to="/">Back to projects</Link>
+            <h1>{copy.projectNotFound}</h1>
+            <Link className="dark-btn" to="/">{copy.backToProjects}</Link>
           </div>
         </div>
       </MotionConfig>
@@ -36,24 +66,30 @@ export function ProjectDetailPage() {
   }
 
   const tone = categoryTone(project.category)
-  const d = project.detail
+  const detail = project.detail
   const hasLinks = Boolean(project.demoUrl || project.githubUrl)
+  const architectureNumber = detail.features?.length ? '07' : '06'
+  const challengesNumber = detail.features?.length ? '08' : '07'
+  const screenshotsNumber = detail.features?.length ? '09' : '08'
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="dark">
+      <div className="dark" dir={direction}>
         <header className="dark-nav">
           <Link to="/" className="dark-brand">
             <span className="dark-brand-dot"></span>
-            {profile.name}
+            {localizedProfile.name}
           </Link>
-          <nav className="dark-links" aria-label="Sections">
-            <SmoothLink href="#overview">Overview</SmoothLink>
-            <SmoothLink href="#problem">Problem</SmoothLink>
-            <SmoothLink href="#solution">Solution</SmoothLink>
-            <SmoothLink href="#architecture">Architecture</SmoothLink>
+          <nav className="dark-links" aria-label={language === 'ar' ? 'أقسام المشروع' : 'Project sections'}>
+            <SmoothLink href="#overview">{copy.navOverview}</SmoothLink>
+            <SmoothLink href="#solution">{copy.navSolution}</SmoothLink>
+            {detail.features?.length ? <SmoothLink href="#features">{copy.navFeatures}</SmoothLink> : null}
+            <SmoothLink href="#architecture">{copy.navArchitecture}</SmoothLink>
           </nav>
-          <Link className="dark-resume" to="/">Projects</Link>
+          <div className="dark-nav-actions">
+            <LanguageToggle />
+            <Link className="dark-resume" to="/">{copy.navProjects}</Link>
+          </div>
         </header>
 
         <main className="dark-detail">
@@ -66,126 +102,134 @@ export function ProjectDetailPage() {
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
               <p className="dark-hero-kicker">
-                {project.category} · {project.year}
+                {getCategoryLabel(project.category, language)} · {project.year}
               </p>
               <h1>{project.title}</h1>
               <p className="dark-hero-deck">{project.summary}</p>
               <ul className="dark-tags">
-                {project.tags.map((t) => (
-                  <li key={t}>{t}</li>
+                {project.tags.map((tag) => (
+                  <li key={tag} dir="auto">{tag}</li>
                 ))}
               </ul>
               <div className="dark-hero-cta">
                 {project.demoUrl ? (
                   <a className="dark-btn dark-btn-primary" href={project.demoUrl} target="_blank" rel="noreferrer">
-                    Open live demo →
+                    {copy.openLiveDemo}
                   </a>
                 ) : null}
                 {project.githubUrl ? (
-                  <a className="dark-btn" href={project.githubUrl} target="_blank" rel="noreferrer">
-                    View source →
+                  <a
+                    className="dark-btn"
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${copy.viewSource}: ${project.title}`}
+                  >
+                    <svg
+                      aria-hidden="true"
+                      style={{ width: '1.05rem', height: '1.05rem', fill: 'currentColor', flex: '0 0 auto' }}
+                    >
+                      <use href="/icons.svg#github-icon" />
+                    </svg>
+                    {copy.viewSource}
                   </a>
                 ) : null}
-                {!hasLinks ? <p className="dark-availability">No public demo or repository — screenshots only.</p> : null}
+                {!hasLinks ? <p className="dark-availability">{copy.noLinks}</p> : null}
               </div>
             </motion.div>
           </section>
 
-          <div className="dark-detail-media">
-            <Reveal>
-              <div className="dark-hero-frame">
-                <AppMock tone={tone} seed={project.id} tall />
-              </div>
-            </Reveal>
-          </div>
-
           <div className="dark-detail-body">
             <section id="overview" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">01 · Overview</p>
-                <h2>Overview</h2>
-                <p className="dark-detail-text">{d.overview}</p>
+                <p className="dark-kicker">{copy.overviewKicker}</p>
+                <h2>{copy.overviewTitle}</h2>
+                <p className="dark-detail-text">{detail.overview}</p>
               </Reveal>
             </section>
 
             <section id="problem" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">02 · Context</p>
-                <h2>Problem</h2>
-                <p className="dark-detail-text">{d.problem}</p>
+                <p className="dark-kicker">{copy.problemKicker}</p>
+                <h2>{copy.problemTitle}</h2>
+                <p className="dark-detail-text">{detail.problem}</p>
               </Reveal>
             </section>
 
             <section id="solution" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">03 · Approach</p>
-                <h2>Solution</h2>
-                <p className="dark-detail-text">{d.solution}</p>
+                <p className="dark-kicker">{copy.solutionKicker}</p>
+                <h2>{copy.solutionTitle}</h2>
+                <p className="dark-detail-text">{detail.solution}</p>
               </Reveal>
             </section>
 
             <section id="role" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">04 · Role</p>
-                <h2>Role</h2>
-                <p className="dark-detail-text">{d.role}</p>
+                <p className="dark-kicker">{copy.roleKicker}</p>
+                <h2>{copy.roleTitle}</h2>
+                <p className="dark-detail-text">{detail.role}</p>
               </Reveal>
             </section>
 
             <section id="stack" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">05 · Stack</p>
-                <h2>Technology</h2>
+                <p className="dark-kicker">{copy.stackKicker}</p>
+                <h2>{copy.stackTitle}</h2>
                 <ul className="dark-tags dark-tags-lg">
-                  {d.stack.map((s) => (
-                    <li key={s}>{s}</li>
+                  {detail.stack.map((item) => (
+                    <li key={item} dir="auto">{item}</li>
                   ))}
                 </ul>
               </Reveal>
             </section>
 
+            {detail.features?.length ? (
+              <section id="features" className="dark-detail-section">
+                <Reveal>
+                  <p className="dark-kicker">{copy.featuresKicker}</p>
+                  <h2>{copy.featuresTitle}</h2>
+                  <ul className="dark-detail-list">
+                    {detail.features.map((feature) => (
+                      <li key={feature}>{feature}</li>
+                    ))}
+                  </ul>
+                </Reveal>
+              </section>
+            ) : null}
+
             <section id="architecture" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">06 · Architecture</p>
-                <h2>Architecture</h2>
-                <FlowDiagram steps={d.architecture} tone={tone} />
+                <p className="dark-kicker">{architectureNumber} · {copy.architectureLabel}</p>
+                <h2>{copy.architectureTitle}</h2>
+                <FlowDiagram steps={detail.architecture} tone={tone} />
               </Reveal>
             </section>
 
             <section id="challenges" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">07 · Challenges</p>
-                <h2>Challenges</h2>
+                <p className="dark-kicker">{challengesNumber} · {copy.challengesLabel}</p>
+                <h2>{copy.challengesTitle}</h2>
                 <ul className="dark-detail-list">
-                  {d.challenges.map((c) => (
-                    <li key={c}>{c}</li>
+                  {detail.challenges.map((challenge) => (
+                    <li key={challenge}>{challenge}</li>
                   ))}
                 </ul>
               </Reveal>
             </section>
 
-            <section id="screenshots" className="dark-detail-section">
-              <Reveal>
-                <p className="dark-kicker">08 · Artifacts</p>
-                <h2>Screenshots</h2>
-                <div className="dark-shots">
-                  {d.screenshots.map((s) => (
-                    <figure className="dark-shot" key={s.label}>
-                      <div className="dark-hero-frame dark-shot-frame">
-                        <AppMock tone={tone} seed={project.id + s.label} />
-                      </div>
-                      <figcaption>
-                        <strong>{s.label}</strong>
-                        <span>{s.caption}</span>
-                      </figcaption>
-                    </figure>
-                  ))}
-                </div>
-              </Reveal>
-            </section>
+            {screenshots.length > 0 ? (
+              <section id="screenshots" className="dark-detail-section">
+                <Reveal>
+                  <p className="dark-kicker">{screenshotsNumber} · {copy.artifactsLabel}</p>
+                  <h2>{copy.screenshotsTitle}</h2>
+                  <ProjectGallery projectTitle={project.title} screenshots={screenshots} />
+                </Reveal>
+              </section>
+            ) : null}
 
             <div className="dark-detail-end">
-              <Link className="dark-btn" to="/">← Back to all projects</Link>
+              <Link className="dark-btn" to="/">{copy.backToAllProjects}</Link>
             </div>
           </div>
         </main>
