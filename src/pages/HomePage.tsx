@@ -28,6 +28,7 @@ function ProjectCard({
   featured?: boolean
 }) {
   const coverImage = project.id === 'balegh' ? baleghCoverImage : getProjectCoverImage(project.id)
+  const coverPosition = project.id === 'balegh' ? 'center top' : 'center'
 
   return (
     <motion.div
@@ -49,7 +50,7 @@ function ProjectCard({
                 src={coverImage}
                 alt={`${project.title} screenshot`}
                 loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: coverPosition, display: 'block' }}
               />
             ) : (
               <AppMock tone={tone} seed={project.id} />
