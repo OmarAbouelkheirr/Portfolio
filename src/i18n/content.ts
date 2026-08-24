@@ -63,6 +63,8 @@ export const uiCopy = {
     galleryThumbnails: 'Gallery thumbnails',
     imageGallery: 'image gallery',
     switchLanguage: 'Switch to Arabic',
+    telegram: 'Telegram',
+    whatsapp: 'WhatsApp',
   },
   ar: {
     navProjects: 'المشاريع',
@@ -123,6 +125,8 @@ export const uiCopy = {
     galleryThumbnails: 'صور المعرض المصغرة',
     imageGallery: 'معرض الصور',
     switchLanguage: 'التبديل إلى الإنجليزية',
+    telegram: 'تيليجرام',
+    whatsapp: 'واتساب',
   },
 } as const
 

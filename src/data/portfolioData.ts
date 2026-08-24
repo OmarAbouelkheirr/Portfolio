@@ -51,10 +51,12 @@ export const profile = {
   role: 'Software Engineer',
   tagline: 'Backend-focused · SaaS · Business Systems',
   location: 'Remote · Worldwide',
-  email: 'omar@example.com',
+  email: 'omarrabouelkheir@gmail.com',
   phone: '+201005454695',
   github: 'https://github.com/OmarAbouelkheirr/',
   linkedin: 'https://www.linkedin.com/in/omar-abouelkhier-eg/',
+  telegram: 'https://t.me/Dev3mora',
+  whatsapp: 'https://wa.me/201005454695',
   youtube: 'https://www.youtube.com/channel/UCG8NTaeAu2U27NZPt9wNktw',
 }
 

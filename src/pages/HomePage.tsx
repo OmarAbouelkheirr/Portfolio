@@ -245,6 +245,8 @@ export function HomePage() {
               <div className="dark-hero-cta">
                 <a className="dark-btn dark-btn-primary" href={`mailto:${localizedProfile.email}`}>{localizedProfile.email}</a>
                 <a className="dark-btn" href={localizedProfile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+                <a className="dark-btn" href={localizedProfile.telegram} target="_blank" rel="noreferrer">{copy.telegram}</a>
+                <a className="dark-btn" href={localizedProfile.whatsapp} target="_blank" rel="noreferrer">{copy.whatsapp}</a>
                 <a className="dark-btn" href={localizedProfile.youtube} target="_blank" rel="noreferrer">YouTube</a>
               </div>
               <p className="dark-footer-meta">{localizedProfile.location} · {localizedProfile.phone}</p>
