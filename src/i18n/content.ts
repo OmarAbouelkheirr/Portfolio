@@ -65,6 +65,9 @@ export const uiCopy = {
     switchLanguage: 'Switch to Arabic',
     telegram: 'Telegram',
     whatsapp: 'WhatsApp',
+    linkedin: 'LinkedIn',
+    youtube: 'YouTube',
+    github: 'GitHub',
   },
   ar: {
     navProjects: 'المشاريع',
@@ -127,6 +130,9 @@ export const uiCopy = {
     switchLanguage: 'التبديل إلى الإنجليزية',
     telegram: 'تيليجرام',
     whatsapp: 'واتساب',
+    linkedin: 'لينكد إن',
+    youtube: 'يوتيوب',
+    github: 'جيت هاب',
   },
 } as const
 

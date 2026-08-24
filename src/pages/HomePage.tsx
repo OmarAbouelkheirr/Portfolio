@@ -151,11 +151,11 @@ export function HomePage() {
               <a className="dark-btn" href="/resume.pdf" download>{copy.downloadResume}</a>
               <a className="dark-btn dark-btn-ghost dark-hero-social" href={localizedProfile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <svg className="dark-btn-icon" aria-hidden="true"><use href="/icons.svg#github-icon" /></svg>
-                GitHub
+                {copy.github}
               </a>
               <a className="dark-btn dark-btn-ghost dark-hero-social" href={localizedProfile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <svg className="dark-btn-icon" aria-hidden="true"><use href="/icons.svg#linkedin-icon" /></svg>
-                LinkedIn
+                {copy.linkedin}
               </a>
             </div>
           </motion.div>
@@ -246,10 +246,10 @@ export function HomePage() {
                 <a className="dark-btn dark-btn-primary" href={`mailto:${localizedProfile.email}`}>{localizedProfile.email}</a>
               </div>
               <div className="dark-hero-cta">
-                <a className="dark-btn" href={localizedProfile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+                <a className="dark-btn" href={localizedProfile.linkedin} target="_blank" rel="noreferrer">{copy.linkedin}</a>
                 <a className="dark-btn" href={localizedProfile.telegram} target="_blank" rel="noreferrer">{copy.telegram}</a>
                 <a className="dark-btn" href={localizedProfile.whatsapp} target="_blank" rel="noreferrer">{copy.whatsapp}</a>
-                <a className="dark-btn" href={localizedProfile.youtube} target="_blank" rel="noreferrer">YouTube</a>
+                <a className="dark-btn" href={localizedProfile.youtube} target="_blank" rel="noreferrer">{copy.youtube}</a>
               </div>
               <p className="dark-footer-meta">{localizedProfile.location} · {localizedProfile.phone}</p>
             </Reveal>
