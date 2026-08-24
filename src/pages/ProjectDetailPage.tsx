@@ -1,10 +1,10 @@
 import { Link, useParams } from 'react-router-dom'
 import { motion, MotionConfig } from 'framer-motion'
 import {
-  findProject,
   categoryTone,
   profile,
 } from '../data/portfolioData.ts'
+import { findProject } from '../data/projectCatalog.ts'
 import { getProjectScreenshots } from '../data/projectImages.ts'
 import { useSpotlight } from '../hooks/useSpotlight.ts'
 import { Reveal } from '../components/Reveal.tsx'
@@ -52,8 +52,8 @@ export function ProjectDetailPage() {
           </Link>
           <nav className="dark-links" aria-label="Sections">
             <SmoothLink href="#overview">Overview</SmoothLink>
-            <SmoothLink href="#problem">Problem</SmoothLink>
             <SmoothLink href="#solution">Solution</SmoothLink>
+            {d.features?.length ? <SmoothLink href="#features">Features</SmoothLink> : null}
             <SmoothLink href="#architecture">Architecture</SmoothLink>
           </nav>
           <Link className="dark-resume" to="/">Projects</Link>
@@ -139,9 +139,23 @@ export function ProjectDetailPage() {
               </Reveal>
             </section>
 
+            {d.features?.length ? (
+              <section id="features" className="dark-detail-section">
+                <Reveal>
+                  <p className="dark-kicker">06 · Product</p>
+                  <h2>Features</h2>
+                  <ul className="dark-detail-list">
+                    {d.features.map((feature) => (
+                      <li key={feature}>{feature}</li>
+                    ))}
+                  </ul>
+                </Reveal>
+              </section>
+            ) : null}
+
             <section id="architecture" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">06 · Architecture</p>
+                <p className="dark-kicker">{d.features?.length ? '07' : '06'} · Architecture</p>
                 <h2>Architecture</h2>
                 <FlowDiagram steps={d.architecture} tone={tone} />
               </Reveal>
@@ -149,7 +163,7 @@ export function ProjectDetailPage() {
 
             <section id="challenges" className="dark-detail-section">
               <Reveal>
-                <p className="dark-kicker">07 · Challenges</p>
+                <p className="dark-kicker">{d.features?.length ? '08' : '07'} · Challenges</p>
                 <h2>Challenges</h2>
                 <ul className="dark-detail-list">
                   {d.challenges.map((c) => (
@@ -162,7 +176,7 @@ export function ProjectDetailPage() {
             {screenshots.length > 0 ? (
               <section id="screenshots" className="dark-detail-section">
                 <Reveal>
-                  <p className="dark-kicker">08 · Artifacts</p>
+                  <p className="dark-kicker">{d.features?.length ? '09' : '08'} · Artifacts</p>
                   <h2>Screenshots</h2>
                   <ProjectGallery projectTitle={project.title} screenshots={screenshots} />
                 </Reveal>
