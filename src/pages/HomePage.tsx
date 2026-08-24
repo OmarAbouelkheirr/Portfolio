@@ -11,6 +11,7 @@ import {
   categoryTone,
 } from '../data/portfolioData.ts'
 import type { Project, Category } from '../data/portfolioData.ts'
+import { getProjectCoverImage } from '../data/projectImages.ts'
 import { useSpotlight } from '../hooks/useSpotlight.ts'
 import { Reveal } from '../components/Reveal.tsx'
 import { AppMock } from '../components/AppMock.tsx'
@@ -26,6 +27,8 @@ function ProjectCard({
   tone: string
   featured?: boolean
 }) {
+  const coverImage = getProjectCoverImage(project.id)
+
   return (
     <motion.div
       layout
@@ -41,7 +44,16 @@ function ProjectCard({
       >
         <div className="dark-card-media">
           <div className="dark-card-media-inner">
-            <AppMock tone={tone} seed={project.id} />
+            {coverImage ? (
+              <img
+                src={coverImage}
+                alt={`${project.title} screenshot`}
+                loading="lazy"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            ) : (
+              <AppMock tone={tone} seed={project.id} />
+            )}
           </div>
           {featured && <span className="dark-card-feat">Featured</span>}
         </div>
