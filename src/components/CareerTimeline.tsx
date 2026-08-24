@@ -6,7 +6,7 @@ import {
   useReducedMotion,
   type MotionValue,
 } from 'framer-motion'
-import { career } from '../data/portfolioData.ts'
+import { useLanguage, type Direction } from '../i18n/LanguageContext.tsx'
 
 const NODE_CENTER = 16
 const clamp01 = (n: number) => Math.min(1, Math.max(0, n))
@@ -21,15 +21,19 @@ function mix(a: { r: number; g: number; b: number }, b: { r: number; g: number; 
   return `rgb(${c(a.r, b.r)}, ${c(a.g, b.g)}, ${c(a.b, b.b)})`
 }
 
-interface MilestoneProps {
-  index: number
+export interface CareerItem {
   year: string
   title: string
   detail: string
+}
+
+interface MilestoneProps extends CareerItem {
+  index: number
   ratio: number
   scrollYProgress: MotionValue<number>
   isHovered: boolean
   reducedMotion: boolean
+  direction: Direction
   registerRef: (index: number, el: HTMLDivElement | null) => void
   onHoverStart: () => void
   onHoverEnd: () => void
@@ -44,6 +48,7 @@ function Milestone({
   scrollYProgress,
   isHovered,
   reducedMotion,
+  direction,
   registerRef,
   onHoverStart,
   onHoverEnd,
@@ -57,7 +62,7 @@ function Milestone({
   })
 
   const opacity = useTransform(progress, (k) => 0.65 + 0.35 * k)
-  const x = useTransform(progress, (k) => 5 * (1 - k))
+  const x = useTransform(progress, (k) => (direction === 'rtl' ? -5 : 5) * (1 - k))
   const fill = useTransform(progress, (k) => mix(INK, BRASS, k))
   const ring = useTransform(progress, (k) => mix(RING, BRASS, k))
   const glow = useTransform(scrollYProgress, (v) => {
@@ -101,12 +106,13 @@ function Milestone({
   )
 }
 
-export function CareerTimeline() {
+export function CareerTimeline({ items }: { items: CareerItem[] }) {
   const timelineRef = useRef<HTMLDivElement | null>(null)
   const itemEls = useRef<(HTMLDivElement | null)[]>([])
-  const [ratios, setRatios] = useState<number[]>(career.map(() => 0))
+  const [ratios, setRatios] = useState<number[]>(items.map(() => 0))
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const prefersReducedMotion = useReducedMotion() ?? false
+  const { direction } = useLanguage()
 
   const { scrollYProgress } = useScroll({
     target: timelineRef,
@@ -136,7 +142,7 @@ export function CareerTimeline() {
     const observer = new ResizeObserver(measure)
     observer.observe(container)
     return () => observer.disconnect()
-  }, [measure])
+  }, [measure, items])
 
   const registerRef = useCallback((index: number, el: HTMLDivElement | null) => {
     itemEls.current[index] = el
@@ -150,19 +156,20 @@ export function CareerTimeline() {
         aria-hidden="true"
         style={{ scaleY: railScaleY }}
       />
-      {career.map((c, i) => (
+      {items.map((item, index) => (
         <Milestone
-          key={`${c.year}-${c.title}`}
-          index={i}
-          year={c.year}
-          title={c.title}
-          detail={c.detail}
-          ratio={ratios[i]}
+          key={`${item.year}-${item.title}`}
+          index={index}
+          year={item.year}
+          title={item.title}
+          detail={item.detail}
+          ratio={ratios[index] ?? 0}
           scrollYProgress={scrollYProgress}
-          isHovered={hoveredIndex === i}
+          isHovered={hoveredIndex === index}
           reducedMotion={prefersReducedMotion}
+          direction={direction}
           registerRef={registerRef}
-          onHoverStart={() => setHoveredIndex(i)}
+          onHoverStart={() => setHoveredIndex(index)}
           onHoverEnd={() => setHoveredIndex(null)}
         />
       ))}
