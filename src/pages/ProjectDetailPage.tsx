@@ -81,12 +81,24 @@ export function ProjectDetailPage() {
               <div className="dark-hero-cta">
                 {project.demoUrl ? (
                   <a className="dark-btn dark-btn-primary" href={project.demoUrl} target="_blank" rel="noreferrer">
-                    Open live demo →
+                    Open live demo
                   </a>
                 ) : null}
                 {project.githubUrl ? (
-                  <a className="dark-btn" href={project.githubUrl} target="_blank" rel="noreferrer">
-                    View source →
+                  <a
+                    className="dark-btn"
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`View ${project.title} source on GitHub`}
+                  >
+                    <svg
+                      aria-hidden="true"
+                      style={{ width: '1.05rem', height: '1.05rem', fill: 'currentColor', flex: '0 0 auto' }}
+                    >
+                      <use href="/icons.svg#github-icon" />
+                    </svg>
+                    View source
                   </a>
                 ) : null}
                 {!hasLinks ? <p className="dark-availability">No public demo or repository — screenshots only.</p> : null}
@@ -184,7 +196,7 @@ export function ProjectDetailPage() {
             ) : null}
 
             <div className="dark-detail-end">
-              <Link className="dark-btn" to="/">← Back to all projects</Link>
+              <Link className="dark-btn" to="/">Back to all projects</Link>
             </div>
           </div>
         </main>
