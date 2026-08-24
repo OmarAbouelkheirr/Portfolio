@@ -899,6 +899,12 @@ html.custom-cursor-enabled * {
   font-size: 1.05rem;
 }
 
+.dark-footer-email-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
 .dark-footer .dark-hero-cta {
   justify-content: center;
 }

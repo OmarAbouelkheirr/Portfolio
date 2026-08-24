@@ -242,8 +242,10 @@ export function HomePage() {
               <p className="dark-kicker">{copy.contact}</p>
               <h2>{copy.footerTitle}</h2>
               <p className="dark-footer-deck">{copy.footerDeck}</p>
-              <div className="dark-hero-cta">
+              <div className="dark-footer-email-row">
                 <a className="dark-btn dark-btn-primary" href={`mailto:${localizedProfile.email}`}>{localizedProfile.email}</a>
+              </div>
+              <div className="dark-hero-cta">
                 <a className="dark-btn" href={localizedProfile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
                 <a className="dark-btn" href={localizedProfile.telegram} target="_blank" rel="noreferrer">{copy.telegram}</a>
                 <a className="dark-btn" href={localizedProfile.whatsapp} target="_blank" rel="noreferrer">{copy.whatsapp}</a>
