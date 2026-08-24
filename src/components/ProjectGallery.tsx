@@ -6,6 +6,22 @@ interface ProjectGalleryProps {
   screenshots: ProjectScreenshot[]
 }
 
+function ChevronLeftIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M14.5 5 7.5 12l7 7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function ChevronRightIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m9.5 5 7 7-7 7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 export function ProjectGallery({ projectTitle, screenshots }: ProjectGalleryProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
@@ -92,7 +108,9 @@ export function ProjectGallery({ projectTitle, screenshots }: ProjectGalleryProp
 
             <div className="project-lightbox-stage">
               {screenshots.length > 1 ? (
-                <button type="button" className="project-lightbox-nav project-lightbox-prev" onClick={showPrevious} aria-label="Previous image">‹</button>
+                <button type="button" className="project-lightbox-nav project-lightbox-prev" onClick={showPrevious} aria-label="Previous image">
+                  <ChevronLeftIcon />
+                </button>
               ) : null}
 
               <img
@@ -101,7 +119,9 @@ export function ProjectGallery({ projectTitle, screenshots }: ProjectGalleryProp
               />
 
               {screenshots.length > 1 ? (
-                <button type="button" className="project-lightbox-nav project-lightbox-next" onClick={showNext} aria-label="Next image">›</button>
+                <button type="button" className="project-lightbox-nav project-lightbox-next" onClick={showNext} aria-label="Next image">
+                  <ChevronRightIcon />
+                </button>
               ) : null}
             </div>
 
