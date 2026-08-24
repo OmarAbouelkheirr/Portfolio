@@ -68,9 +68,7 @@ function ProjectCard({
               <li key={t}>{t}</li>
             ))}
           </ul>
-          <span className="dark-card-go">
-            Open case study <span className="dark-arrow">→</span>
-          </span>
+          <span className="dark-card-go">Open case study</span>
         </div>
       </Link>
     </motion.div>
