@@ -7,6 +7,7 @@ import {
 import { findProject } from '../data/projectCatalog.ts'
 import { getProjectScreenshots } from '../data/projectImages.ts'
 import { baleghScreenshots } from '../data/baleghImages.ts'
+import { howToTrainAIScreenshots } from '../data/howToTrainAIImages.ts'
 import { useSpotlight } from '../hooks/useSpotlight.ts'
 import { Reveal } from '../components/Reveal.tsx'
 import { FlowDiagram } from '../components/FlowDiagram.tsx'
@@ -41,7 +42,11 @@ export function ProjectDetailPage() {
   const tone = categoryTone(project.category)
   const d = project.detail
   const hasLinks = Boolean(project.demoUrl || project.githubUrl)
-  const screenshots = project.id === 'balegh' ? baleghScreenshots : getProjectScreenshots(project.id)
+  const screenshots = project.id === 'balegh'
+    ? baleghScreenshots
+    : project.id === 'how-to-train-your-ai'
+      ? howToTrainAIScreenshots
+      : getProjectScreenshots(project.id)
 
   return (
     <MotionConfig reducedMotion="user">
