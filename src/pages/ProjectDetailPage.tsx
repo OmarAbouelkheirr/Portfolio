@@ -5,11 +5,13 @@ import {
   categoryTone,
   profile,
 } from '../data/portfolioData.ts'
-import { getProjectScreenshotImages } from '../data/projectImages.ts'
+import { getProjectScreenshots } from '../data/projectImages.ts'
 import { useSpotlight } from '../hooks/useSpotlight.ts'
 import { Reveal } from '../components/Reveal.tsx'
 import { FlowDiagram } from '../components/FlowDiagram.tsx'
 import { SmoothLink } from '../components/SmoothLink.tsx'
+import { ProjectGallery } from '../components/ProjectGallery.tsx'
+import '../styles/projectGallery.css'
 
 export function ProjectDetailPage() {
   const { projectId } = useParams()
@@ -38,7 +40,7 @@ export function ProjectDetailPage() {
   const tone = categoryTone(project.category)
   const d = project.detail
   const hasLinks = Boolean(project.demoUrl || project.githubUrl)
-  const screenshotImages = getProjectScreenshotImages(project.id)
+  const screenshots = getProjectScreenshots(project.id)
 
   return (
     <MotionConfig reducedMotion="user">
@@ -157,34 +159,12 @@ export function ProjectDetailPage() {
               </Reveal>
             </section>
 
-            {screenshotImages.length > 0 ? (
+            {screenshots.length > 0 ? (
               <section id="screenshots" className="dark-detail-section">
                 <Reveal>
                   <p className="dark-kicker">08 · Artifacts</p>
                   <h2>Screenshots</h2>
-                  <div className="dark-shots">
-                    {screenshotImages.map((imageUrl, index) => {
-                      const screenshot = d.screenshots[index]
-                      return (
-                        <figure className="dark-shot" key={imageUrl}>
-                          <div className="dark-hero-frame dark-shot-frame">
-                            <img
-                              src={imageUrl}
-                              alt={`${project.title} ${screenshot?.label ?? `screenshot ${index + 1}`}`}
-                              loading="lazy"
-                              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                            />
-                          </div>
-                          {screenshot ? (
-                            <figcaption>
-                              <strong>{screenshot.label}</strong>
-                              <span>{screenshot.caption}</span>
-                            </figcaption>
-                          ) : null}
-                        </figure>
-                      )
-                    })}
-                  </div>
+                  <ProjectGallery projectTitle={project.title} screenshots={screenshots} />
                 </Reveal>
               </section>
             ) : null}
