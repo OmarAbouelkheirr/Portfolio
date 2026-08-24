@@ -12,6 +12,7 @@ import { projects, FEATURED_ID } from '../data/projectCatalog.ts'
 import type { Project, Category } from '../data/portfolioData.ts'
 import { getProjectCoverImage } from '../data/projectImages.ts'
 import { baleghCoverImage } from '../data/baleghImages.ts'
+import { howToTrainAICoverImage } from '../data/howToTrainAIImages.ts'
 import { useSpotlight } from '../hooks/useSpotlight.ts'
 import { Reveal } from '../components/Reveal.tsx'
 import { AppMock } from '../components/AppMock.tsx'
@@ -27,8 +28,11 @@ function ProjectCard({
   tone: string
   featured?: boolean
 }) {
-  const coverImage = project.id === 'balegh' ? baleghCoverImage : getProjectCoverImage(project.id)
-  const coverPosition = project.id === 'balegh' ? 'center top' : 'center'
+  const coverImage = project.id === 'balegh'
+    ? baleghCoverImage
+    : project.id === 'how-to-train-your-ai'
+      ? howToTrainAICoverImage
+      : getProjectCoverImage(project.id)
 
   return (
     <motion.div
@@ -50,7 +54,7 @@ function ProjectCard({
                 src={coverImage}
                 alt={`${project.title} screenshot`}
                 loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: coverPosition, display: 'block' }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
               />
             ) : (
               <AppMock tone={tone} seed={project.id} />
