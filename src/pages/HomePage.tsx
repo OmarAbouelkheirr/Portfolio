@@ -2,14 +2,13 @@ import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion'
 import {
-  projects,
   profile,
   expertise,
   about,
   CATEGORY_FILTERS,
-  FEATURED_ID,
   categoryTone,
 } from '../data/portfolioData.ts'
+import { projects, FEATURED_ID } from '../data/projectCatalog.ts'
 import type { Project, Category } from '../data/portfolioData.ts'
 import { getProjectCoverImage } from '../data/projectImages.ts'
 import { useSpotlight } from '../hooks/useSpotlight.ts'
