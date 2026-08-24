@@ -1,0 +1,85 @@
+name: Capture Balegh desktop screenshots
+
+on:
+  push:
+    branches:
+      - feature/project-images
+    paths:
+      - .github/workflows/capture-balegh-portfolio.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: balegh-portfolio-screenshots-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout portfolio branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/project-images
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Capture Balegh desktop pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="public/projects/balegh/desktop"
+          mkdir -p "$OUT"
+
+          capture() {
+            local route="$1"
+            local file="$2"
+            npx playwright screenshot \
+              --browser chromium \
+              --viewport-size="1440,1000" \
+              --full-page \
+              --wait-for-timeout=1800 \
+              "https://balegh-academy.com${route}" \
+              "$OUT/$file"
+          }
+
+          capture "/" "01-home.png"
+          capture "/courses" "02-courses.png"
+          capture "/login" "03-login.png"
+          capture "/register" "04-register.png"
+          capture "/forgot-password" "05-forgot-password.png"
+          capture "/admin/login" "06-admin-login.png"
+          capture "/faq" "07-faq.png"
+          capture "/support" "08-support.png"
+          capture "/contact" "09-contact.png"
+          capture "/privacy" "10-privacy.png"
+          capture "/terms" "11-terms.png"
+          capture "/registration-unavailable" "12-registration-unavailable.png"
+          capture "/courses/f636a702-ae1a-4c1f-b18e-5c8c1a7a3be9" "13-course-foundation-verbal.png"
+          capture "/courses/c31fc3f7-719f-47e7-a010-f58bc63bdf0c" "14-course-training-verbal.png"
+
+      - name: Commit screenshots
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/projects/balegh/desktop
+          if git diff --cached --quiet; then
+            echo "No screenshot changes to commit."
+            exit 0
+          fi
+          git commit -m "docs: add Balegh desktop screenshots"
+          git push origin HEAD:feature/project-images
