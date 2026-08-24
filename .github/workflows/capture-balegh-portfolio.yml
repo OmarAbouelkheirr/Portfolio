@@ -34,44 +34,97 @@ jobs:
 
       - name: Install Playwright Chromium
         run: |
-          npm install --no-save playwright@1.55.0
+          npm install --no-save --package-lock=false playwright@1.55.0
           npx playwright install --with-deps chromium
 
       - name: Capture Balegh desktop pages
         shell: bash
         run: |
-          set -euo pipefail
-          OUT="public/projects/balegh/desktop"
-          mkdir -p "$OUT"
+          node <<'NODE'
+          const { chromium } = require('playwright')
+          const fs = require('fs')
+          const path = require('path')
 
-          capture() {
-            local route="$1"
-            local file="$2"
-            npx playwright screenshot \
-              --browser chromium \
-              --viewport-size="1440,1000" \
-              --full-page \
-              --wait-for-timeout=1800 \
-              "https://balegh-academy.com${route}" \
-              "$OUT/$file"
-          }
+          const baseUrl = 'https://balegh-academy.com'
+          const outDir = path.resolve('public/projects/balegh/desktop')
+          fs.mkdirSync(outDir, { recursive: true })
 
-          capture "/" "01-home.png"
-          capture "/courses" "02-courses.png"
-          capture "/login" "03-login.png"
-          capture "/register" "04-register.png"
-          capture "/forgot-password" "05-forgot-password.png"
-          capture "/admin/login" "06-admin-login.png"
-          capture "/faq" "07-faq.png"
-          capture "/support" "08-support.png"
-          capture "/contact" "09-contact.png"
-          capture "/privacy" "10-privacy.png"
-          capture "/terms" "11-terms.png"
-          capture "/registration-unavailable" "12-registration-unavailable.png"
-          capture "/courses/f636a702-ae1a-4c1f-b18e-5c8c1a7a3be9" "13-course-foundation-verbal.png"
-          capture "/courses/c31fc3f7-719f-47e7-a010-f58bc63bdf0c" "14-course-training-verbal.png"
+          const targets = [
+            ['/', '01-home.png', 'Home Page'],
+            ['/courses', '02-courses.png', 'Courses Catalog'],
+            ['/login', '03-login.png', 'Student Login'],
+            ['/register', '04-register.png', 'Account Registration'],
+            ['/forgot-password', '05-forgot-password.png', 'Password Recovery'],
+            ['/admin/login', '06-admin-login.png', 'Admin Login'],
+            ['/faq', '07-faq.png', 'FAQ'],
+            ['/support', '08-support.png', 'Support'],
+            ['/contact', '09-contact.png', 'Contact'],
+            ['/privacy', '10-privacy.png', 'Privacy Policy'],
+            ['/terms', '11-terms.png', 'Terms of Use'],
+            ['/registration-unavailable', '12-registration-unavailable.png', 'Registration Unavailable'],
+            ['/courses/f636a702-ae1a-4c1f-b18e-5c8c1a7a3be9', '13-course-foundation-verbal.png', 'Verbal Foundation Course'],
+            ['/courses/c31fc3f7-719f-47e7-a010-f58bc63bdf0c', '14-course-training-verbal.png', 'Verbal Training Course'],
+          ]
+
+          ;(async () => {
+            const browser = await chromium.launch({ headless: true })
+            const context = await browser.newContext({
+              viewport: { width: 1440, height: 1000 },
+              locale: 'ar-EG',
+              colorScheme: 'dark',
+              deviceScaleFactor: 1,
+            })
+            const page = await context.newPage()
+            const results = []
+
+            for (const [route, file, label] of targets) {
+              try {
+                const response = await page.goto(`${baseUrl}${route}`, {
+                  waitUntil: 'domcontentloaded',
+                  timeout: 60000,
+                })
+                await page.waitForTimeout(1800)
+                await page.evaluate(async () => {
+                  if (document.fonts?.ready) await document.fonts.ready
+                })
+                await page.addStyleTag({
+                  content: `
+                    *, *::before, *::after {
+                      animation-duration: 0s !important;
+                      animation-delay: 0s !important;
+                      transition-duration: 0s !important;
+                      scroll-behavior: auto !important;
+                      caret-color: transparent !important;
+                    }
+                  `,
+                })
+                await page.screenshot({
+                  path: path.join(outDir, file),
+                  fullPage: true,
+                  animations: 'disabled',
+                })
+                results.push({ route, file, label, status: response?.status() ?? null, ok: true })
+                console.log(`Captured ${file}`)
+              } catch (error) {
+                console.error(`Failed ${route}: ${error.message}`)
+                results.push({ route, file, label, ok: false, error: error.message })
+              }
+            }
+
+            fs.writeFileSync(
+              path.join(outDir, 'manifest.json'),
+              `${JSON.stringify({ source: baseUrl, capturedAt: new Date().toISOString(), results }, null, 2)}\n`,
+            )
+
+            await browser.close()
+          })().catch((error) => {
+            console.error(error)
+            process.exitCode = 1
+          })
+          NODE
 
       - name: Commit screenshots
+        if: always()
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
