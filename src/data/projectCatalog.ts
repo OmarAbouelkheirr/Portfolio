@@ -27,7 +27,7 @@ const baleghProject: PortfolioProject = {
     solution:
       'A single-tenant modular-monolith backend built with ASP.NET Core 10 and PostgreSQL, paired with an Angular 20 SSR/hydrated frontend. Redis supports caching and rate-limiting concerns, NSwag keeps the frontend API client aligned with the backend contract, and the production stack runs in Docker behind Nginx on AWS with S3-backed file storage.',
     role:
-      'Product & Backend Engineer: designed the backend architecture and domain workflows, implemented authentication and permission-based authorization, learning and administration APIs, database persistence, production infrastructure, and the integration contract used by the Angular frontend.',
+      'Product & Full-Stack Engineer: designed the backend architecture and domain workflows, implemented authentication, permission-based authorization, learning and administration APIs, database persistence, and production infrastructure, while also building the Angular frontend, Arabic-first RTL user experience, student and admin workflows, SSR/hydration, and frontend-backend integration.',
     stack: [
       '.NET 10',
       'ASP.NET Core 10',
