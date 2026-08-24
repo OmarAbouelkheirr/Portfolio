@@ -79,11 +79,59 @@ const baleghProject: PortfolioProject = {
   },
 }
 
+const projectLinkOverrides: Record<string, Pick<PortfolioProject, 'demoUrl' | 'githubUrl'>> = {
+  eventhub: {
+    demoUrl: 'http://onlineticketing.runasp.net/',
+    githubUrl: 'https://github.com/OmarAbouelkheirr/EventTicketingSystem',
+  },
+  cinemaverse: {
+    demoUrl: undefined,
+    githubUrl: 'https://github.com/OmarAbouelkheirr/CinemaVerse',
+  },
+  taskmint: {
+    demoUrl: undefined,
+    githubUrl: undefined,
+  },
+  dvld: {
+    demoUrl: undefined,
+    githubUrl: 'https://github.com/OmarAbouelkheirr/Driving-Vehicles-and-Licenses-Department-System',
+  },
+  'blood-bank': {
+    demoUrl: undefined,
+    githubUrl: 'https://github.com/OmarAbouelkheirr/BBMS-Project',
+  },
+  'how-to-train-your-ai': {
+    demoUrl: undefined,
+    githubUrl: 'https://github.com/OmarAbouelkheirr/HowToTrainYourAI-Game',
+  },
+  'keyword-guard': {
+    demoUrl: undefined,
+    githubUrl: undefined,
+  },
+  'study-tracker': {
+    demoUrl: 'https://devsclubtracker.tryasp.net/',
+    githubUrl: 'https://github.com/OmarAbouelkheirr/StudyTracker',
+  },
+  'kau-medreg': {
+    demoUrl: undefined,
+    githubUrl: undefined,
+  },
+  uniconnect: {
+    demoUrl: 'https://graduation-team-builder.vercel.app/',
+    githubUrl: 'https://github.com/OmarAbouelkheirr/graduation-team-builder',
+  },
+}
+
 export const FEATURED_ID = 'balegh'
 
 export const projects: PortfolioProject[] = [
   baleghProject,
-  ...(baseProjects.filter((project) => project.id !== 'masar') as PortfolioProject[]),
+  ...(baseProjects
+    .filter((project) => project.id !== 'masar')
+    .map((project) => ({
+      ...project,
+      ...(projectLinkOverrides[project.id] ?? {}),
+    })) as PortfolioProject[]),
 ]
 
 export function findProject(id: string | undefined): PortfolioProject | undefined {
