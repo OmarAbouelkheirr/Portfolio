@@ -11,6 +11,7 @@ import {
 import { projects, FEATURED_ID } from '../data/projectCatalog.ts'
 import type { Project, Category } from '../data/portfolioData.ts'
 import { getProjectCoverImage } from '../data/projectImages.ts'
+import { baleghCoverImage } from '../data/baleghImages.ts'
 import { useSpotlight } from '../hooks/useSpotlight.ts'
 import { Reveal } from '../components/Reveal.tsx'
 import { AppMock } from '../components/AppMock.tsx'
@@ -26,7 +27,7 @@ function ProjectCard({
   tone: string
   featured?: boolean
 }) {
-  const coverImage = getProjectCoverImage(project.id)
+  const coverImage = project.id === 'balegh' ? baleghCoverImage : getProjectCoverImage(project.id)
 
   return (
     <motion.div
