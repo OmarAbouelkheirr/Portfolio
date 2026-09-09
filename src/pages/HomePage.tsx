@@ -14,6 +14,7 @@ import { useSpotlight } from '../hooks/useSpotlight.ts'
 import { Reveal } from '../components/Reveal.tsx'
 import { AppMock } from '../components/AppMock.tsx'
 import { CareerTimeline } from '../components/CareerTimeline.tsx'
+import { CoursesSection } from '../components/CoursesSection.tsx'
 import { SmoothLink } from '../components/SmoothLink.tsx'
 import { LanguageToggle } from '../components/LanguageToggle.tsx'
 import { useLanguage } from '../i18n/LanguageContext.tsx'
@@ -122,6 +123,7 @@ export function HomePage() {
           </Link>
           <nav className="dark-links" aria-label={copy.navProjects}>
             <SmoothLink href="#projects">{copy.navProjects}</SmoothLink>
+            <SmoothLink href="#courses">{copy.navCourses}</SmoothLink>
             <SmoothLink href="#expertise">{copy.navExpertise}</SmoothLink>
             <SmoothLink href="#journey">{copy.navJourney}</SmoothLink>
             <SmoothLink href="#about">{copy.navAbout}</SmoothLink>
@@ -196,6 +198,8 @@ export function HomePage() {
             </AnimatePresence>
           </div>
         </section>
+
+        <CoursesSection />
 
         <section className="dark-section dark-section-raise" id="expertise">
           <div className="dark-section-head">

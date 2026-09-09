@@ -1,4 +1,5 @@
 import { about, career, expertise, profile, type Category } from '../data/portfolioData.ts'
+import { coursesCatalog, type CourseItem } from '../data/coursesCatalog.ts'
 import type { PortfolioProject } from '../data/projectCatalog.ts'
 import type { ProjectScreenshot } from '../data/projectImages.ts'
 import type { Language } from './LanguageContext.tsx'
@@ -6,6 +7,7 @@ import type { Language } from './LanguageContext.tsx'
 export const uiCopy = {
   en: {
     navProjects: 'Projects',
+    navCourses: 'Courses',
     navExpertise: 'Expertise',
     navJourney: 'Journey',
     navAbout: 'About',
@@ -21,6 +23,11 @@ export const uiCopy = {
     theWork: 'The work',
     projectsTitle: 'Projects',
     projectsDeck: 'One featured system, then the collection, filterable by category.',
+    coursesKicker: 'TECHNICAL EDUCATION',
+    coursesTitle: 'Courses & Content Creation',
+    coursesDeck: 'Creating structured technical courses and tutorials in Deep Learning, Big Data, Assembly, and Python Automation.',
+    watchCourse: 'Watch Series',
+    channelButton: 'Visit YouTube Channel',
     featured: 'Featured',
     openCaseStudy: 'Open case study',
     capabilities: 'Capabilities',
@@ -71,6 +78,7 @@ export const uiCopy = {
   },
   ar: {
     navProjects: 'المشاريع',
+    navCourses: 'الدورات',
     navExpertise: 'الخبرات',
     navJourney: 'المسيرة',
     navAbout: 'نبذة عني',
@@ -86,6 +94,11 @@ export const uiCopy = {
     theWork: 'أعمالي',
     projectsTitle: 'المشاريع',
     projectsDeck: 'مشروع مميز في البداية، ثم بقية الأعمال مع إمكانية التصفية حسب النوع.',
+    coursesKicker: 'إثراء المحتوى التقني',
+    coursesTitle: 'الدورات والمحتوى التعليمي',
+    coursesDeck: 'سلاسل ودورات تعليمية متخصصة في الذكاء الاصطناعي، البيانات الضخمة، لغة التجميع، وأتمتة البرمجة.',
+    watchCourse: 'شاهد السلسلة',
+    channelButton: 'زيارة القناة على يوتيوب',
     featured: 'مميز',
     openCaseStudy: 'عرض تفاصيل المشروع',
     capabilities: 'القدرات',
@@ -585,4 +598,53 @@ export function localizeScreenshots(
     ...screenshot,
     ...(translations[index] ?? {}),
   }))
+}
+
+export function getLocalizedCourses(language: Language): CourseItem[] {
+  if (language === 'en') return coursesCatalog
+
+  const arabicMap: Record<string, { title: string; summary: string; lessonsCount: string; tags: string[] }> = {
+    'deep-learning': {
+      title: 'الشبكات العصبية والتعلم العميق',
+      lessonsCount: '8 دروس',
+      summary: 'سلسلة أكاديمية مركزة تغطي أساسيات الشبكات العصبية، الـ Perceptron، خوارزمية Backpropagation، والـ Autoencoders.',
+      tags: ['الشبكات العصبية', 'Backpropagation', 'التعلم العميق', 'بايثون'],
+    },
+    'big-data': {
+      title: 'البيانات الضخمة وأنظمة الفهرسة والاسترجاع',
+      lessonsCount: '6 دروس',
+      summary: 'دورة حاسوبية تناقش معماريات البيانات الضخمة، أنظمة الفهرسة متعددة المستويات، واسترجاع البيانات ضخمة الحجم.',
+      tags: ['البيانات الضخمة', 'الفهرسة والاسترجاع', 'أنظمة قواعد البيانات'],
+    },
+    'file-processing': {
+      title: 'تنظيم ومعالجة الملفات في علوم الحاسب',
+      lessonsCount: '5 دروس',
+      summary: 'شرح لمفاهيم علوم الحاسب حول هياكل الملفات الفيزيائية، الفهرسة الأساسية، وتحسين تخزين وصيانة الملفات.',
+      tags: ['أنظمة الملفات', 'الفهرسة الأساسية', 'هياكل البيانات'],
+    },
+    'pyrogram-bots': {
+      title: 'برمجة بوتات التيليجرام بلغة بايثون',
+      lessonsCount: '8 دروس',
+      summary: 'دورة عملية كاملة لبناء بوتات تيليجرام تفاعلية وغير متزامنة باستخدام بايثون ومكتبة Pyrogram.',
+      tags: ['بايثون', 'Pyrogram', 'Async', 'Telegram API', 'أتمتة'],
+    },
+    'assembly-x86': {
+      title: 'برمجة لغة التجميع Assembly x86 (8086)',
+      lessonsCount: 'أنظمة منخفضة المستوى',
+      summary: 'شروحات في البرمجة منخفضة المستوى تبسط التعامل مع مسجلات معالج Intel x86 والذاكرة.',
+      tags: ['Assembly x86', '8086', 'مسجلات المعالج', 'منخفض المستوى'],
+    },
+  }
+
+  return coursesCatalog.map((course) => {
+    const ar = arabicMap[course.id]
+    if (!ar) return course
+    return {
+      ...course,
+      title: ar.title,
+      lessonsCount: ar.lessonsCount,
+      summary: ar.summary,
+      tags: ar.tags,
+    }
+  })
 }
