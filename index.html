@@ -13,6 +13,39 @@
     <meta property="og:description" content="Backend-focused software engineer building SaaS products, business systems, APIs, databases, and production web applications." />
     <meta property="og:url" content="https://3mora.tech/" />
     <meta name="twitter:card" content="summary" />
+    
+    <!-- Critical Inline Styles to prevent FOUC (Flash of Unstyled Content) -->
+    <style>
+      html, body, #root {
+        margin: 0;
+        padding: 0;
+        background-color: #0b0d10;
+        color: #e9e6df;
+        font-family: 'Archivo', system-ui, -apple-system, sans-serif;
+        min-height: 100vh;
+      }
+      .app-initial-loader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #0b0d10;
+        color: #c9a86a;
+      }
+      .app-initial-spinner {
+        width: 32px;
+        height: 32px;
+        border: 2px solid rgba(201, 168, 106, 0.15);
+        border-top-color: #c9a86a;
+        border-radius: 50%;
+        animation: appSpin 0.7s linear infinite;
+      }
+      @keyframes appSpin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -45,20 +78,16 @@
   </head>
   <body>
     <div id="root">
-      <main>
+      <div class="app-initial-loader">
+        <div class="app-initial-spinner"></div>
+      </div>
+    </div>
+    <noscript>
+      <div style="padding: 2rem; color: #fff; background: #0b0d10;">
         <h1>Omar Abouelkhier — Software Engineer</h1>
         <p>Backend-focused software engineer building SaaS products, business systems, APIs, databases, multi-tenant architectures, desktop systems, and production web applications.</p>
-        <h2>Selected work</h2>
-        <ul>
-          <li><a href="/projects/balegh">Balegh</a> — production Arabic-first LMS built with ASP.NET Core, Angular, PostgreSQL, Redis, Docker, and AWS.</li>
-          <li><a href="/projects/eventhub">EventHub</a> — event discovery and ticketing platform with multi-role workflows and QR ticket verification.</li>
-          <li><a href="/projects/cinemaverse">CinemaVerse</a> — cinema booking platform with payments, scheduling, background jobs, and QR tickets.</li>
-          <li><a href="/projects/study-tracker">StudyTracker</a> — study and learning workflow tracking project.</li>
-          <li><a href="/projects/how-to-train-your-ai">How To Train Your AI</a> — Unity game project with interactive AI-training mechanics.</li>
-        </ul>
-        <p><a href="/resume.pdf">Resume</a></p>
-      </main>
-    </div>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
