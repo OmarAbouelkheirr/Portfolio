@@ -1,5 +1,6 @@
 import { about, career, expertise, profile, type Category } from '../data/portfolioData.ts'
 import { coursesCatalog, type CourseItem } from '../data/coursesCatalog.ts'
+import { certificatesCatalog, type CertificateCategory, type CertificateItem } from '../data/certificatesData.ts'
 import type { PortfolioProject } from '../data/projectCatalog.ts'
 import type { ProjectScreenshot } from '../data/projectImages.ts'
 import type { Language } from './LanguageContext.tsx'
@@ -8,6 +9,7 @@ export const uiCopy = {
   en: {
     navProjects: 'Projects',
     navCourses: 'Courses',
+    navCertificates: 'Certificates',
     navExpertise: 'Expertise',
     navJourney: 'Journey',
     navAbout: 'About',
@@ -28,6 +30,16 @@ export const uiCopy = {
     coursesDeck: 'Creating structured technical courses and tutorials in Deep Learning, Big Data, Assembly, and Python Automation.',
     watchCourse: 'Watch Series',
     channelButton: 'Visit YouTube Channel',
+    certsKicker: 'VERIFIED CREDENTIALS',
+    certsTitle: 'Licenses & Certifications',
+    certsDeck: '28+ verified certifications spanning Algorithms, Data Structures, OOP, C#/.NET, T-SQL, Web Development, and System Security.',
+    showAllCerts: 'Show All 28 Certifications',
+    showFeaturedCerts: 'Show Featured Certifications',
+    viewCoursePage: 'Course Page',
+    viewCredential: 'Credential ID',
+    viewLinkedInCerts: 'View All Credentials on LinkedIn',
+    credentialIssuer: 'Issued by',
+    issuedDateLabel: 'Issued',
     featured: 'Featured',
     openCaseStudy: 'Open case study',
     capabilities: 'Capabilities',
@@ -79,6 +91,7 @@ export const uiCopy = {
   ar: {
     navProjects: 'المشاريع',
     navCourses: 'الدورات',
+    navCertificates: 'الشهادات',
     navExpertise: 'الخبرات',
     navJourney: 'المسيرة',
     navAbout: 'نبذة عني',
@@ -99,6 +112,16 @@ export const uiCopy = {
     coursesDeck: 'سلاسل ودورات تعليمية متخصصة في الذكاء الاصطناعي، البيانات الضخمة، لغة التجميع، وأتمتة البرمجة.',
     watchCourse: 'شاهد السلسلة',
     channelButton: 'زيارة القناة على يوتيوب',
+    certsKicker: 'الشهادات والاعتمادات',
+    certsTitle: 'الشهادات وتطوير المهارات',
+    certsDeck: 'أكثر من 28 شهادة معتمدة في الخوارزميات، هياكل البيانات، C#/.NET، قواعد البيانات SQL، وتطوير الويب والأمن البرمجي.',
+    showAllCerts: 'عرض جميع الشهادات الـ 28',
+    showFeaturedCerts: 'عرض الشهادات البارزة فقط',
+    viewCoursePage: 'صفحة الكورس',
+    viewCredential: 'معرف الشهادة',
+    viewLinkedInCerts: 'عرض جميع الاعتمادات على LinkedIn',
+    credentialIssuer: 'الجهة المانحة',
+    issuedDateLabel: 'تاريخ الإصدار',
     featured: 'مميز',
     openCaseStudy: 'عرض تفاصيل المشروع',
     capabilities: 'القدرات',
@@ -648,3 +671,24 @@ export function getLocalizedCourses(language: Language): CourseItem[] {
     }
   })
 }
+
+export function getLocalizedCertificates(language: Language): CertificateItem[] {
+  if (language === 'en') return certificatesCatalog
+
+  const categoryArabicMap: Record<CertificateCategory, CertificateCategory | string> = {
+    'All': 'الكل',
+    'C# & .NET': 'C# و .NET',
+    'Algorithms & DS': 'الخوارزميات وهياكل البيانات',
+    'Databases & SQL': 'قواعد البيانات و SQL',
+    'Web & APIs': 'الويب والـ APIs',
+    'Foundations': 'الأساسيات وعلوم الحاسب',
+  }
+
+  return certificatesCatalog.map((cert) => {
+    return {
+      ...cert,
+      category: (categoryArabicMap[cert.category] as CertificateCategory) || cert.category,
+    }
+  })
+}
+
