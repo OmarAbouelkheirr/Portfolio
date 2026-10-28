@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import { HomePage } from './pages/HomePage.tsx'
 import { ProjectDetailPage } from './pages/ProjectDetailPage.tsx'
 import { ScrollToTop } from './components/ScrollToTop.tsx'
@@ -16,6 +17,7 @@ function App() {
           <Route path="/projects/:projectId" element={<ProjectDetailPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+        <Analytics />
       </BrowserRouter>
     </LanguageProvider>
   )
