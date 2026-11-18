@@ -509,6 +509,76 @@ html.custom-cursor-enabled * {
   font-size: 1.02rem;
 }
 
+.dark-awards {
+  padding-block-start: 0;
+}
+
+.dark-awards .dark-section-head {
+  margin-block-end: clamp(1.5rem, 4vw, 2.6rem);
+}
+
+.dark-award-card {
+  display: grid;
+  gap: 1.25rem;
+  max-inline-size: 860px;
+  margin-inline: auto;
+  padding: clamp(1rem, 4vw, 2rem);
+  border: 1px solid var(--dark-line);
+  border-radius: 16px;
+  background: var(--dark-surface);
+  text-align: start;
+}
+
+.dark-award-details {
+  min-inline-size: 0;
+}
+
+.dark-award-details h3 {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  line-height: 1.2;
+}
+
+.dark-award-event,
+.dark-award-result,
+.dark-award-summary {
+  margin: 0;
+  color: var(--dark-muted);
+}
+
+.dark-award-event {
+  font-size: 0.9rem;
+}
+
+.dark-award-result {
+  margin-block: 0.6rem 0.4rem;
+  color: var(--dark-accent);
+  font-weight: 600;
+}
+
+.dark-award-summary {
+  max-inline-size: 56ch;
+}
+
+.dark-award-link {
+  justify-content: center;
+  min-block-size: 44px;
+  text-align: center;
+}
+
+.dark-award-link:focus-visible {
+  outline: 2px solid var(--dark-accent);
+  outline-offset: 4px;
+}
+
+@media (min-width: 721px) {
+  .dark-award-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+  }
+}
+
 .dark-filters {
   display: flex;
   justify-content: center;
@@ -1052,6 +1122,19 @@ html.custom-cursor-enabled * {
   }
 }
 
+@media (641px <= width <= 960px) {
+  .dark-nav {
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .dark-links {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.3rem 0.8rem;
+  }
+}
+
 @media (max-width: 720px) {
   .dark-shots {
     grid-template-columns: 1fr;
@@ -1111,7 +1194,7 @@ html.custom-cursor-enabled * {
 /* Technical Courses & Educational Content Styles */
 .dark-courses-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   gap: 1.4rem;
   max-width: 1200px;
   margin: 0 auto 3rem;

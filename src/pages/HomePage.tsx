@@ -201,6 +201,23 @@ export function HomePage() {
           </div>
         </section>
 
+        <section className="dark-section dark-awards" id="awards" aria-labelledby="awards-title">
+          <div className="dark-section-head">
+            <h2 id="awards-title">{copy.awardsTitle}</h2>
+          </div>
+          <article className="dark-award-card">
+            <div className="dark-award-details">
+              <p className="dark-award-event">{copy.marsAwardEvent}</p>
+              <h3><bdi lang="en">Mars Life Line</bdi></h3>
+              <p className="dark-award-result">{copy.marsAwardResult}</p>
+              <p className="dark-award-summary">{copy.marsAwardSummary}</p>
+            </div>
+            <a className="dark-btn dark-award-link" href="https://baraa404.github.io/mars-life-line-game/">
+              {copy.marsAwardPlay}
+            </a>
+          </article>
+        </section>
+
         <CoursesSection />
         <CertificatesSection />
 
