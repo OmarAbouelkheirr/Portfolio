@@ -1,4 +1,4 @@
-import { useMemo, useState, type CSSProperties } from 'react'
+import { useMemo, useState, type CSSProperties, type FocusEvent, type KeyboardEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion'
 import {
@@ -94,6 +94,19 @@ function ProjectCard({
   )
 }
 
+function closeMenuOnBlur(event: FocusEvent<HTMLDetailsElement>) {
+  if (!event.currentTarget.contains(event.relatedTarget)) {
+    event.currentTarget.open = false
+  }
+}
+
+function closeMenuOnEscape(event: KeyboardEvent<HTMLDetailsElement>) {
+  if (event.key !== 'Escape' || !event.currentTarget.open) return
+  event.preventDefault()
+  event.currentTarget.open = false
+  event.currentTarget.querySelector('summary')?.focus()
+}
+
 export function HomePage() {
   const [filter, setFilter] = useState<'All' | Category>('All')
   const spotlight = useSpotlight()
@@ -109,6 +122,16 @@ export function HomePage() {
   )
 
   const featured = localizedProjects.find((project) => project.id === FEATURED_ID)
+  const sectionLinks = [
+    { href: '#projects', label: copy.navProjects },
+    { href: '#awards', label: copy.awardsTitle, mobileOnly: true },
+    { href: '#courses', label: copy.navCourses },
+    { href: '#certificates', label: copy.navCertificates },
+    { href: '#expertise', label: copy.navExpertise },
+    { href: '#journey', label: copy.navJourney },
+    { href: '#about', label: copy.navAbout },
+    { href: '#contact', label: copy.contact, mobileOnly: true },
+  ]
   const filtered = useMemo(
     () => (filter === 'All' ? localizedProjects : localizedProjects.filter((project) => project.category === filter)),
     [filter, localizedProjects],
@@ -117,22 +140,35 @@ export function HomePage() {
   return (
     <MotionConfig reducedMotion="user">
       <div className="dark" dir={direction}>
-        <header className="dark-nav">
+        <header className="dark-nav dark-home-nav">
           <Link to="/" className="dark-brand">
             <span className="dark-brand-dot"></span>
             {localizedProfile.name}
           </Link>
-          <nav className="dark-links" aria-label={copy.navProjects}>
-            <SmoothLink href="#projects">{copy.navProjects}</SmoothLink>
-            <SmoothLink href="#courses">{copy.navCourses}</SmoothLink>
-            <SmoothLink href="#certificates">{copy.navCertificates}</SmoothLink>
-            <SmoothLink href="#expertise">{copy.navExpertise}</SmoothLink>
-            <SmoothLink href="#journey">{copy.navJourney}</SmoothLink>
-            <SmoothLink href="#about">{copy.navAbout}</SmoothLink>
+          <nav className="dark-links" aria-label={copy.siteNavigation}>
+            {sectionLinks.filter((link) => !link.mobileOnly).map(({ href, label }) => (
+              <SmoothLink key={href} href={href}>{label}</SmoothLink>
+            ))}
           </nav>
           <div className="dark-nav-actions">
             <LanguageToggle />
             <a className="dark-resume" href="/resume.pdf" download>{copy.resume}</a>
+            <details className="dark-mobile-menu" onBlur={closeMenuOnBlur} onKeyDown={closeMenuOnEscape}>
+              <summary aria-label={copy.menu}>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+                  <path className="dark-menu-open-icon" d="M4 7h16M4 12h16M4 17h16" />
+                  <path className="dark-menu-close-icon" d="m6 6 12 12M18 6 6 18" />
+                </svg>
+              </summary>
+              <nav className="dark-mobile-links" aria-label={copy.siteNavigation}>
+                {sectionLinks.map(({ href, label }) => (
+                  <a key={href} href={href} onClick={(event) => {
+                    const menu = event.currentTarget.closest('details')
+                    if (menu) menu.open = false
+                  }}>{label}</a>
+                ))}
+              </nav>
+            </details>
           </div>
         </header>
 

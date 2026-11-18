@@ -377,6 +377,12 @@ html.custom-cursor-enabled * {
   margin: 0 0 2.2rem;
 }
 
+.dark-mobile-menu summary:focus-visible,
+.dark-mobile-links a:focus-visible {
+  outline: 2px solid var(--dark-accent);
+  outline-offset: 4px;
+}
+
 .dark-hero-cta {
   display: flex;
   flex-wrap: wrap;
@@ -408,13 +414,13 @@ html.custom-cursor-enabled * {
   box-shadow: 0 10px 30px -12px rgba(201, 168, 106, 0.4);
 }
 
-.dark-btn-primary {
+.dark .dark-btn-primary {
   background: var(--dark-accent);
   border-color: var(--dark-accent);
-  color: #0b0d10;
+  color: var(--dark-bg);
 }
 
-.dark-btn-primary:hover {
+.dark .dark-btn-primary:hover {
   background: #d8b97e;
   border-color: #d8b97e;
   box-shadow: 0 10px 34px -10px rgba(201, 168, 106, 0.55);
@@ -1144,6 +1150,10 @@ html.custom-cursor-enabled * {
   }
 }
 
+.dark-mobile-menu {
+  display: none;
+}
+
 @media (max-width: 640px) {
   .dark-nav {
     justify-content: space-between;
@@ -1151,6 +1161,63 @@ html.custom-cursor-enabled * {
   }
   .dark-links {
     display: none;
+  }
+  .dark-home-nav .dark-resume {
+    display: none;
+  }
+  .dark-mobile-menu {
+    display: block;
+  }
+  .dark-mobile-menu summary {
+    display: grid;
+    place-items: center;
+    inline-size: 44px;
+    block-size: 44px;
+    border: 1px solid var(--dark-line-strong);
+    border-radius: 999px;
+    color: var(--dark-text);
+    list-style: none;
+    cursor: pointer;
+  }
+  .dark-mobile-menu summary::-webkit-details-marker {
+    display: none;
+  }
+  .dark-menu-close-icon,
+  .dark-mobile-menu[open] .dark-menu-open-icon {
+    display: none;
+  }
+  .dark-mobile-menu[open] .dark-menu-close-icon {
+    display: inline;
+  }
+  .dark-mobile-links {
+    position: absolute;
+    inset-block-start: calc(100% + 0.4rem);
+    inset-inline-end: 1.25rem;
+    inline-size: min(19rem, calc(100% - 2.5rem));
+    max-block-size: calc(100dvh - 6rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.4rem;
+    border: 1px solid var(--dark-line-strong);
+    border-radius: 14px;
+    background: var(--dark-surface);
+  }
+  .dark-mobile-links a {
+    display: flex;
+    align-items: center;
+    min-block-size: 44px;
+    padding-inline: 0.85rem;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+  .dark-mobile-links a:hover {
+    background: var(--dark-raise);
+  }
+  .dark-mobile-links a:focus-visible {
+    outline-offset: -2px;
+  }
+  .dark-section {
+    scroll-margin-block-start: 5.5rem;
   }
   .dark-grid {
     grid-template-columns: 1fr;
